@@ -12,7 +12,7 @@ use App\Http\Controllers\ConsumoController;
 use App\Http\Controllers\DispositivoController;
 use App\Http\Controllers\TipoDispositivoController;
 use App\Http\Controllers\SimcardsAsignadaController;
-
+use App\Http\Controllers\KashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/kash', [App\Http\Controllers\KashController::class, 'index']);
 
 
 Route::resource('consumos',App\Http\Controllers\ConsumoController::class)->middleware('can:admin');
