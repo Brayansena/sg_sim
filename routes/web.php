@@ -10,6 +10,7 @@ use App\Http\Controllers\PuntoVentaController;
 use App\Http\Controllers\RedeController;
 use App\Http\Controllers\ConsumoController;
 use App\Http\Controllers\DispositivoController;
+use App\Http\Controllers\DispositivoAsignadoController;
 use App\Http\Controllers\TipoDispositivoController;
 use App\Http\Controllers\SimcardsAsignadaController;
 use App\Http\Controllers\KashController;
@@ -119,11 +120,7 @@ Route::patch('user/{user}',[UserController::class,'passwordUpdate'])->name('user
 
 
 
-Route::resource('dispositivos',App\Http\Controllers\DispositivoController::class)->middleware('can:invenBode');
-
-Route::get('dispositivo/eleccion',[DispositivoController::class,'eleccion'])->name('dispositivos.eleccion')->middleware('can:invenBode');
-
-Route::get('dispositivo/create',[DispositivoController::class,'eleccionado'])->name('dispositivos.eleccionado')->middleware('can:invenBode');
+Route::resource('dispositivos',App\Http\Controllers\DispositivoController::class);
 
 Route::get('dispositivo/consulta',[DispositivoController::class,'consulta'])->name('dispositivos.consulta')->middleware('can:tecniBodeAdminInve');
 
@@ -132,5 +129,4 @@ Route::get('dispositivo/exportar',[DispositivoController::class,'exportar'])->na
 Route::post('dispositivo/importar',[DispositivoController::class,'importar'])->name('dispositivos.importar')->middleware('can:invenBode');
 
 
-
-Route::resource('tipo-dispositivos',App\Http\Controllers\TipoDispositivoController::class)->middleware('can:inventario');
+Route::resource('dispositivo-asignados',App\Http\Controllers\DispositivoAsignadoController::class);

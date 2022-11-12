@@ -31,15 +31,15 @@ class Simcard extends Model
 {
 
     static $rules = [
-        'id' => 'required',
-		'linea' => 'required',
-        'apn' => 'required',
-		'usuario' => 'required',
-		'clave' => 'required',
-		'planAsignado' => 'required',
-		'fechaCorte' => 'required',
-		'id_userCreador' => 'required',
-		'operador' => 'required',
+        // 'id' => 'required',
+		// 'linea' => 'required',
+        // 'apn' => 'required',
+		// 'usuario' => 'required',
+		// 'clave' => 'required',
+		// 'planAsignado' => 'required',
+		// 'fechaCorte' => 'required',
+		// 'id_userCreador' => 'required',
+		// 'operador' => 'required',
     ];
 
     protected $perPage = 20;

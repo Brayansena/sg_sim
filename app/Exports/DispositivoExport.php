@@ -17,14 +17,14 @@ class DispositivoExport implements FromCollection, WithHeadings
         $dispositivos = DB::table('dispositivos')
             ->join('users','dispositivos.id_userCreador','=','users.id')
             ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
-            ->select('dispositivos.marca','dispositivos.descripcion','dispositivos.id','dispositivos.serial','dispositivos.tipoDispositivo','dispositivos.fechaAsignacion','dispositivos.id_puntoVenta','punto_ventas.nombrePDv','dispositivos.cedulaResponsable','dispositivos.responsable','dispositivos.numeroActa','dispositivos.estado','dispositivos.mac','dispositivos.imei','dispositivos.capacidad','dispositivos.observacion','dispositivos.updated_at')
+            ->select('dispositivos.modelo','dispositivos.id','dispositivos.serial','dispositivos.tipoDispositivo','dispositivos.id_puntoVenta','punto_ventas.nombrePDv','dispositivos.numeroActa','dispositivos.estado','dispositivos.mac','dispositivos.imei','dispositivos.observacion','dispositivos.updated_at')
             ->get();
             return $dispositivos;
     }
     public function headings(): array
     {
         return [
-            'MARCA','DESCRIPCION','ACTIVO','SERIAL','TIPO DISPOSITIVO','FECHA ASIGNACION','COD PDV','NOMBRE PDV','CC RESPONSABLE','RESPONSABLE','NUMERO ACTA','ESTADO','MAC','IMEI','CAPACIDAD','OBSERVACION','ULTIMA MODIFICACION'
+            'MODELO','ACTIVO','SERIAL','TIPO DISPOSITIVO','COD PDV','NOMBRE PDV','NUMERO ACTA','ESTADO','MAC','IMEI','OBSERVACION','ULTIMA MODIFICACION'
         ];
     }
 }

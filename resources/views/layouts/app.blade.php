@@ -21,11 +21,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app2.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-
+    {{-- <script type="text/javascript" src="js/jquery.js"></script> --}}
 </head>
 <body>
     @if(@Auth::user()->hasRole('admin'))
-    <div id="">
+    <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="/">SG SIMS</a>
@@ -89,7 +89,6 @@
     </div>
         @endif
         @if(@Auth::user()->hasRole('inventario'))
-    <div id="">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="/">SG SIMS</a>
@@ -99,8 +98,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="/dispositivos">Activos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/tipo-dispositivos/create">Tipo Dispositivo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivos">Dispositivo</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('dispositivos.consulta') }}">Consultar Activos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
@@ -150,7 +148,6 @@
     </div>
         @endif
         @if(@Auth::user()->hasRole('bodega'))
-        <div id="">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="">
                 <div class="container px-4 px-lg-5">
                     <a class="navbar-brand" href="">SG SIMS</a>
@@ -211,7 +208,6 @@
         </div>
             @endif
             @if(@Auth::user()->hasRole('tecnico'))
-            <div id="">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="">
                     <div class="container px-4 px-lg-5">
                         <a class="navbar-brand" href="/">SG SIMS</a>
@@ -298,4 +294,5 @@
         })
 
 </script>
+
 </html>

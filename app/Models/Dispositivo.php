@@ -7,20 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Dispositivo
  *
- * @property $marca
- * @property $descripcion
  * @property $id
  * @property $tipoDispositivo
  * @property $serial
  * @property $id_puntoVenta
  * @property $estado
- * @property $cedulaResponsable
- * @property $responsable
- * @property $fechaAsignacion
  * @property $numeroActa
  * @property $mac
  * @property $imei
- * @property $capacidad
  * @property $observacion
  * @property $id_userCreador
  * @property $created_at
@@ -36,14 +30,13 @@ class Dispositivo extends Model
 {
 
     static $rules = [
-		'marca' => 'required',
-		'descripcion' => 'required',
+        'id' => 'required',
+        'estado' => 'required',
 		'tipoDispositivo' => 'required',
-		'serial' => 'required',
 		'id_puntoVenta' => 'required',
-		'estado' => 'required',
+        'id_userAsignado' => 'required',
+        'numeroActa' => 'required',
     ];
-
     protected $perPage = 20;
 
     /**
@@ -51,7 +44,7 @@ class Dispositivo extends Model
      *
      * @var array
      */
-    protected $fillable = ['id','marca','descripcion','tipoDispositivo','serial','id_puntoVenta','estado','cedulaResponsable','responsable','fechaAsignacion','numeroActa','mac','imei','capacidad','observacion','id_userCreador'];
+    protected $fillable = ['id','modelo','tipoDispositivo','serial','id_puntoVenta','estado','id_userAsignado','numeroActa','mac','imei','observacion','id_userCreador','procesador','ram','discoDuro','cantidad'];
 
 
     /**

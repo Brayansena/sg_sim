@@ -32,9 +32,10 @@ class DispositivoController extends Controller
         $dispositivos = DB::table('dispositivos')
             ->join('users','dispositivos.id_userCreador','=','users.id')
             ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
-            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.marca','dispositivos.descripcion','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.capacidad','dispositivos.observacion','users.name','dispositivos.cedulaResponsable','dispositivos.responsable','dispositivos.fechaAsignacion','dispositivos.numeroActa','dispositivos.updated_at')
+            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
 
@@ -42,32 +43,49 @@ class DispositivoController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
 
-
-    public function eleccion(Request $request)
-    {
-        $dispositivo = new Dispositivo();
-        $tipoDispositivo=TipoDispositivo::pluck('dispositivo','id');
-
-        return view('dispositivo.eleccion', compact('tipoDispositivo','dispositivo'));
-    }
-    public function eleccionado(Request $request)
-    {
-        $dispositivo = new Dispositivo();
-        $tipo=$request->input('tipo');
-        $tipo->save();
-        $estado=Estado::pluck('estado','estado');
-        $tipoDispositivo=TipoDispositivo::pluck('dispositivo','dispositivo');
-        return view('dispositivo.eleccionado', compact('tipo','tipoDispositivo','estado'));
-    }
-
-
-
     public function create()
     {
+        $collectionPda = collect([
+            ['id' => 'N910', 'na' => 'N910'],
+            ['id' => 'Vs1', 'na' => 'Vs1'],
+            ['id' => 'Cs10', 'na' => 'Cs10'],
+        ]);
+        $pda = $collectionPda->pluck('id','na');
+        $pda->all();
+
+        $collectionImpresora = collect([
+            ['id' => 'Epson', 'na' => 'Epson'],
+            ['id' => 'Sat', 'na' => 'Sat'],
+        ]);
+        $impresora = $collectionImpresora->pluck('id','na');
+        $impresora->all();
+
+
+        $collectionRouter = collect([
+            ['id' => 'ZTE', 'na' => 'ZTE'],
+            ['id' => 'MIKROTIK', 'na' => 'MIKROTIK'],
+        ]);
+        $router = $collectionRouter->pluck('id','na');
+        $router->all();
+
+
+
+
+        $tipo=0;
         $dispositivo = new Dispositivo();
+        $selesion = DB::table('users')
+        ->select('id','name')
+        ->where('id','>=', 2)
+        ->orderBy('id','asc')
+        ->paginate(1000000);
+        $users = $selesion->pluck('name','id');
         $estado=Estado::pluck('estado','estado');
-        $tipoDispositivo=TipoDispositivo::pluck('dispositivo','dispositivo');
-        return view('dispositivo.create', compact('tipo','dispositivo','estado'));
+        $tipoPluck=TipoDispositivo::pluck('dispositivo','dispositivo');
+        $tipoDispositivos=DB::table('tipo_dispositivos')
+        ->select('id','dispositivo')
+        ->orderBy('id','asc')
+        ->paginate(100000000000);
+        return view('dispositivo.create', compact('router','impresora','pda','users','tipo','tipoDispositivos','dispositivo','estado','tipoPluck'));
     }
 
     public function store(Request $request)
@@ -78,9 +96,15 @@ class DispositivoController extends Controller
         $idu = Auth::id();
         $dispositivo->id_userCreador=$idu;
         $dispositivo->save();
-
-        return redirect()->route('dispositivos.index')
+        if ($dispositivo->id_puntoVenta==1) {
+            return redirect()->route('dispositivos.index')
             ->with('success', 'Dispositivo creado satisfactoriamente.');
+        } else {
+            # code...
+        }
+
+
+
     }
 
     /**
@@ -117,9 +141,9 @@ class DispositivoController extends Controller
      * @param  Dispositivo $dispositivo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dispositivo $dispositivo)
+    public function update(Request $request, $id)
     {
-        request()->validate(Dispositivo::$rules);
+        $dispositivo=Dispositivo::findOrFail($id);
 
         $dispositivo->update($request->all());
 
@@ -156,9 +180,10 @@ class DispositivoController extends Controller
         $dispositivos = DB::table('dispositivos')
             ->join('users','dispositivos.id_userCreador','=','users.id')
             ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
-            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.marca','dispositivos.descripcion','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.capacidad','dispositivos.observacion','users.name','dispositivos.cedulaResponsable','dispositivos.responsable','dispositivos.fechaAsignacion','dispositivos.numeroActa','dispositivos.updated_at')
+            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
 

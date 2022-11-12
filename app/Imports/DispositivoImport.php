@@ -17,21 +17,16 @@ class DispositivoImport implements ToModel, WithHeadingRow, WithUpserts
     public function model(array $row)
     {
         return new Dispositivo([
-            'marca'=>$row['marca'],
-            'descripcion'=>$row['descripcion'],
+            'modelo'=>$row['modelo'],
             'id'=>$row['activo'],
             'tipoDispositivo'=>$row['tipo_dispositivo'],
             'serial'=>$row['serial'],
             'id_puntoVenta'=>$row['cod_pdv'],
             'nombrePDv'=>$row['nombre_pdv'],
-            'cedulaResponsable'=>$row['cc_responsable'],
-            'responsable'=>$row['responsable'],
-            'fechaAsignacion'=>$row['fecha_asignacion'],
             'numeroActa'=>$row['numero_acta'],
             'estado'=>$row['estado'],
             'mac'=>$row['mac'],
             'imei'=>$row['imei'],
-            'capacidad'=>$row['capacidad'],
             'observacion'=>$row['observacion'],
         ]);
     }

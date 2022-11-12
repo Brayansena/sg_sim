@@ -47,21 +47,17 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>Marca</th>
-										<th>Descripcion</th>
+                                        <th>Modelo</th>
                                         <th>Activo</th>
 										<th>Tipo&nbspDispositivo</th>
 										<th>Serial</th>
 										<th>Cod&nbspPDV</th>
                                         <th>Nombre&nbspPdv</th>
 										<th>Estado</th>
-										<th>Cedula&nbspResponsable</th>
-										<th>Responsable</th>
 										<th>Fecha&nbspAsignacion</th>
 										<th>Numero&nbspActa</th>
 										<th>Mac</th>
 										<th>Imei</th>
-										<th>Capacidad</th>
 										<th>Observacion</th>
 										<th>Modificado Por</th>
 										<th>Ultima modificacion</th>
@@ -72,21 +68,16 @@
                                 <tbody>
                                     @foreach ($dispositivos as $dispositivo)
                                         <tr>
-                                            <td>{{ $dispositivo->marca }}</td>
-											<td>{{ $dispositivo->descripcion }}</td>
+                                            <td>{{ $dispositivo->modelo }}</td>
 											<td>{{ $dispositivo->id }}</td>
 											<td>{{ $dispositivo->tipoDispositivo }}</td>
 											<td>{{ $dispositivo->serial }}</td>
 											<td>{{ $dispositivo->id_puntoVenta }}</td>
 											<td>{{ $dispositivo->nombrePdv }}</td>
 											<td>{{ $dispositivo->estado }}</td>
-											<td>{{ $dispositivo->cedulaResponsable }}</td>
-											<td>{{ $dispositivo->responsable }}</td>
-											<td>{{ $dispositivo->fechaAsignacion }}</td>
 											<td>{{ $dispositivo->numeroActa }}</td>
 											<td>{{ $dispositivo->mac }}</td>
 											<td>{{ $dispositivo->imei }}</td>
-											<td>{{ $dispositivo->capacidad }}</td>
 											<td>{{ $dispositivo->observacion }}</td>
 											<td>{{ $dispositivo->name }}</td>
                                             <td>{{ $dispositivo->updated_at }}</td>

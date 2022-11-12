@@ -8,6 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
+
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex;align-items: center;flex-direction: row-reverse;justify-content: space-between;padding: 10px 5px 5px;">
@@ -28,7 +29,7 @@
                                 <a href="{{ route('dispositivos.exportar') }}" class="btn btn-warning btn-sm2 float-right"  data-placement="left">
                                     {{ __('Exportar') }}
                                   </a>
-                                <a href="{{ route('dispositivos.eleccion') }}" class="btn btn-primary btn-sm2 float-right"  data-placement="left">
+                                <a href="{{ route('dispositivos.create') }}" class="btn btn-primary btn-sm2 float-right"  data-placement="left">
                                   {{ __('Crear') }}
                                 </a>
                               </div>
@@ -55,21 +56,22 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>Marca</th>
-										<th>Descripcion</th>
+                                        <th>Modelo</th>
                                         <th>Activo</th>
 										<th>Tipo&nbspDispositivo</th>
 										<th>Serial</th>
 										<th>Cod&nbspPDV</th>
                                         <th>Nombre&nbspPdv</th>
 										<th>Estado</th>
-										<th>Cedula&nbspResponsable</th>
-										<th>Responsable</th>
-										<th>Fecha&nbspAsignacion</th>
 										<th>Numero&nbspActa</th>
+                                        <th>Procesador</th>
+                                        <th>Ram</th>
+                                        <th>Disco Duro</th>
 										<th>Mac</th>
 										<th>Imei</th>
-										<th>Capacidad</th>
+                                        <th>Cantidad</th>
+
+
 										<th>Observacion</th>
 										<th>Modificado Por</th>
 										<th>Ultima modificacion</th>
@@ -80,21 +82,22 @@
                                 <tbody>
                                     @foreach ($dispositivos as $dispositivo)
                                         <tr>
-                                            <td>{{ $dispositivo->marca }}</td>
-											<td>{{ $dispositivo->descripcion }}</td>
+                                            <td>{{ $dispositivo->modelo }}</td>
 											<td>{{ $dispositivo->id }}</td>
 											<td>{{ $dispositivo->tipoDispositivo }}</td>
 											<td>{{ $dispositivo->serial }}</td>
 											<td>{{ $dispositivo->id_puntoVenta }}</td>
 											<td>{{ $dispositivo->nombrePdv }}</td>
 											<td>{{ $dispositivo->estado }}</td>
-											<td>{{ $dispositivo->cedulaResponsable }}</td>
-											<td>{{ $dispositivo->responsable }}</td>
-											<td>{{ $dispositivo->fechaAsignacion }}</td>
 											<td>{{ $dispositivo->numeroActa }}</td>
+                                            <td>{{ $dispositivo->procesador }}</td>
+                                            <td>{{ $dispositivo->ram }}</td>
+                                            <td>{{ $dispositivo->discoDuro }}</td>
 											<td>{{ $dispositivo->mac }}</td>
 											<td>{{ $dispositivo->imei }}</td>
-											<td>{{ $dispositivo->capacidad }}</td>
+                                            <td>{{ $dispositivo->cantidad }}</td>
+
+
 											<td>{{ $dispositivo->observacion }}</td>
 											<td>{{ $dispositivo->name }}</td>
                                             <td>{{ $dispositivo->updated_at }}</td>

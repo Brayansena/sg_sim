@@ -13,29 +13,63 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Crear Dispositivo</span>
+                        <span class="card-title">Selecionar Tipo Dispositivo</span>
                     </div>
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('dispositivos.eleccionado') }}"  role="form" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="box box-info padding-1">
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        {{ Form::label('tipo Dispositivo') }}
-                                        {{ Form::text('tipoDispositivo',$tipoDispositivo, $dispositivo->id, ['class' => 'form-control' . ($errors->has('tipoDispositivo') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Dispositivo']) }}
-                                        {!! $errors->first('tipoDispositivo', '<div class="invalid-feedback">:message</div>') !!}
-                                    </div>
-                                <br>
-                                <div class="box-footer mt20">
-                                    <button type="submit" class="btn btn-primary">Enviar</button>
-                                </div>
-                            </div>
-
+                        <form action="index.php" method="post">
+                            Estado actual:
+                            <select id="status" name="status" onChange="mostrar(this.value);">
+                                <option value="estudiante">Estudiante</option>
+                                <option value="trabajador">Trabajador</option>
+                                <option value="autonomo">Autónomo</option>
+                                <option value="paro">En el paro</option>
+                             </select>
                         </form>
+                        <div id="estudiante" style="display: none;">
+                            <h2>Si eres estudiante...</h2>
+                            <form method="POST" action="{{ route('dispositivos.store') }}"  role="form" enctype="multipart/form-data">
+                                @csrf
+
+                                @include('dispositivo.form')
+
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    function mostrar(id) {
+        if (id == "estudiante") {
+            $("#estudiante").show();
+            $("#trabajador").hide();
+            $("#autonomo").hide();
+            $("#paro").hide();
+        }
+
+        if (id == "trabajador") {
+            $("#estudiante").hide();
+            $("#trabajador").show();
+            $("#autonomo").hide();
+            $("#paro").hide();
+        }
+
+        if (id == "autonomo") {
+            $("#estudiante").hide();
+            $("#trabajador").hide();
+            $("#autonomo").show();
+            $("#paro").hide();
+        }
+
+        if (id == "paro") {
+            $("#estudiante").hide();
+            $("#trabajador").hide();
+            $("#autonomo").hide();
+            $("#paro").show();
+        }
+    }
+    </script>
 @endsection

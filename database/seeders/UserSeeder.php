@@ -356,19 +356,7 @@ class UserSeeder extends Seeder
 
 
         TipoDispositivo::create([
-            'dispositivo' => 'pda Cs10',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'pda Tab910',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'pda v1s',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'discos duros',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'sid',
+            'dispositivo' => 'torre',
         ]);
         TipoDispositivo::create([
             'dispositivo' => 'teclado',
@@ -377,58 +365,128 @@ class UserSeeder extends Seeder
             'dispositivo' => 'mouse',
         ]);
         TipoDispositivo::create([
-            'dispositivo' => 'monitores',
+            'dispositivo' => 'monitor sin VGA',
         ]);
         TipoDispositivo::create([
-            'dispositivo' => 'arañas',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'impresoras',
-        ]);
-
-        TipoDispositivo::create([
-            'dispositivo' => 'torres',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'minitorres',
-        ]);
-
-        TipoDispositivo::create([
-            'dispositivo' => 'lector de barras',
+            'dispositivo' => 'monitor VGA',
         ]);
         TipoDispositivo::create([
             'dispositivo' => 'todo en uno',
         ]);
         TipoDispositivo::create([
-            'dispositivo' => 'lectores biometricos',
+            'dispositivo' => 'pda',
         ]);
         TipoDispositivo::create([
-            'dispositivo' => 'telefonos voip',
+            'dispositivo' => 'mini torre',
+        ]);
+        //2
+        TipoDispositivo::create([
+            'dispositivo' => 'portatil',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'sid',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'lector de barras',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'lectore biometrico',
         ]);
         TipoDispositivo::create([
             'dispositivo' => 'camaras logitech',
         ]);
         TipoDispositivo::create([
-            'dispositivo' => 'regulador',
+            'dispositivo' => 'impresora',
         ]);
+        //2
         TipoDispositivo::create([
-            'dispositivo' => 'ups',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'camara ip',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'router microtip',
-        ]);
-        TipoDispositivo::create([
-            'dispositivo' => 'router zte',
+            'dispositivo' => 'escaner',
         ]);
         TipoDispositivo::create([
             'dispositivo' => 'base refrigerante',
         ]);
         TipoDispositivo::create([
-            'dispositivo' => 'escaner',
+            'dispositivo' => 'disco duro',
         ]);
+
+
+
+
+
+
+
+
+
+        TipoDispositivo::create([
+            'dispositivo' => 'haplite',
+        ]);
+        //2
+        TipoDispositivo::create([
+            'dispositivo' => 'antena',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'router',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'switches',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'antena directv',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'decodificador directv',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'control tv',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'control directv',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'telefono voip',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'ups',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'regulador',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'rag',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'camara ip',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'dvr',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'camara vigilancia',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'televisor',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'board alarma',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'bateria alarma',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'gprs alarma',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'teclado alarma',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'boton de panico',
+        ]);
+        TipoDispositivo::create([
+            'dispositivo' => 'sensor',
+        ]);
+
+
+
         TipoDispositivo::create([
             'dispositivo' => 'otro',
         ]);

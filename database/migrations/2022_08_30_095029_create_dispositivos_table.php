@@ -17,18 +17,14 @@ return new class extends Migration
 
             $table->string('tipoDispositivo');
             $table->id();
-            $table->string('serial');
-            $table->string('modelo');
-            $table->string('descripcion');
-            $table->unsignedBigInteger('id_puntoVenta');
+            $table->string('serial')->nullable();
+            $table->string('modelo')->nullable();
+            $table->unsignedBigInteger('id_puntoVenta')->default(1);
             $table->foreign('id_puntoVenta')->references('id')->on('punto_ventas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('estado');
-            $table->string('cedulaResponsable')->nullable();
-            $table->string('nombreResponsable')->nullable();
             $table->unsignedBigInteger('id_userAsignado');
-            $table->foreign('id_userAsignado')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('fechaAsignacion')->nullable();
-            $table->string('numeroActa')->nullable();
+            $table->foreign('id_userAsignado')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->string('numeroActa');
             $table->string('procesador')->nullable();
             $table->string('ram')->nullable();
             $table->string('discoDuro')->nullable();
@@ -36,7 +32,7 @@ return new class extends Migration
             $table->string('imei')->nullable();
             $table->text('observacion')->nullable();
             $table->string('cantidad')->nullable();
-            $table->unsignedBigInteger('id_userCreador');
+            $table->unsignedBigInteger('id_userCreador')->default();
             $table->foreign('id_userCreador')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
