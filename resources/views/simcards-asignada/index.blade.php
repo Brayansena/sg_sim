@@ -50,6 +50,7 @@
 
 										<th>Observaciones</th>
 										<th>Linea</th>
+                                        <th>Cod Punto Venta</th>
 										<th>Punto Venta</th>
                                         <th>Conexion</th>
 										<th>User Creador</th>
@@ -66,6 +67,7 @@
 
 											<td>{{ $simcardsAsignada->observaciones }}</td>
 											<td>{{ $simcardsAsignada->linea }}</td>
+                                            <td>{{ $simcardsAsignada->id_puntoVenta }}</td>
 											<td>{{ $simcardsAsignada->nombrePdv }}</td>
 											<td>{{ $simcardsAsignada->conexion }}</td>
 											<td>{{ $simcardsAsignada->name }}</td>
