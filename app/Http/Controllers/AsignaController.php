@@ -120,6 +120,7 @@ class AsignaController extends Controller
         request()->validate(IntercambiosSim::$rules);
 
         $simcardsAsignada = SimcardsAsignada::find($id);
+        $simcard = Simcard::find($id);
         $idu = Auth::id();
         $intercambio = new IntercambiosSim();
         $intercambio->id_oldSimcard=$simcardsAsignada->id_simcard;
@@ -141,8 +142,8 @@ class AsignaController extends Controller
         $SimcardsAsignadasRegistrada->fechaRegistro=now();
         $SimcardsAsignadasRegistrada->observaciones=$simcardsAsignada->observaciones;
         $SimcardsAsignadasRegistrada->id_puntoVenta=$simcardsAsignada->id_puntoVenta;
-        $SimcardsAsignadasRegistrada->id_simcard=$simcardsAsignada->id_simcard;
-        $SimcardsAsignadasRegistrada->estado='Inactiva';
+        $SimcardsAsignadasRegistrada->id_simcard=$request->input('id_newSimcard');
+        $SimcardsAsignadasRegistrada->estado='Activa';
         $SimcardsAsignadasRegistrada->save();
 
 

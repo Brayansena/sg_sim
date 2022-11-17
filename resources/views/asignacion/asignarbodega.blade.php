@@ -45,7 +45,7 @@
                                     @foreach ( $simcards as $simcard )
                                     <tr>
                                         <td>
-                                            <input type="checkbox" value="{{ $simcard->id }}" id="{{ $simcard->id }}" name="asignando[]">
+                                            <input type="radio" value="{{ $simcard->id }}" id="{{ $simcard->id }}" name="asignando[]" required>
                                         </td>
                                         <td>{{ $simcard->id }}</td>
                                         <td>{{ $simcard->linea }}</td>

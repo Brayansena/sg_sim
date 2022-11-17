@@ -35,7 +35,6 @@ class DispositivoController extends Controller
             ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
-            ->orWhere('users.name','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
 
@@ -183,7 +182,6 @@ class DispositivoController extends Controller
             ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
-            ->orWhere('users.name','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
 

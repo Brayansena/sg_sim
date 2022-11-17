@@ -36,16 +36,16 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>linea</th>
-                                    <th>usuario asignado</th>
-                                    <th>estado</th>
+                                    <th>Linea</th>
+                                    <th>Usuario Asignado</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ( $simcards as $simcard )
                                 <tr>
                                     <td>
-                                        <input type="checkbox" value="{{ $simcard->id }}" id="{{ $simcard->id }}" name="activado[]" required>
+                                        <input type="radio" value="{{ $simcard->id }}" id="{{ $simcard->id }}" name="activado[]" required>
                                         {{ $simcard->id }}
                                     </td>
                                     <td>{{ $simcard->linea }}</td>

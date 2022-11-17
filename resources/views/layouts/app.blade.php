@@ -36,10 +36,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/simcards-asignadas">Simcard Activas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/estado">Estado</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/estado">Reasignar</a></li>
                         <li class="nav-item"><a class="nav-link" href="/asignar/bodega">Asignar a Bodega</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/punto-ventas">Puntos de venta</a></li>
                         <li class="nav-item"><a class="nav-link" href="/simcards">Simcards</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/punto-ventas">Puntos de Venta</a></li>
                         <li class="nav-item"><a class="nav-link" href="/redes">Redes</a></li>
                         <li class="nav-item"><a class="nav-link" href="/consumos">Consumos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/users">Usuarios</a></li>
@@ -99,9 +99,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/dispositivos">Dispositivo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('dispositivos.consulta') }}">Consultar Activos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -160,8 +160,8 @@
                             <li class="nav-item"><a class="nav-link" href="/bodegas">Asignacion</a></li>
                             <li class="nav-item"><a class="nav-link" href="/estado">Estado de simcards</a></li>
                             <li class="nav-item"><a class="nav-link" href="/dispositivos">Activos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
                             <!-- Authentication Links -->
@@ -217,12 +217,12 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarResponsive">
                             <ul class="navbar-nav ms-auto">
-                                <li class="nav-item"><a class="nav-link" href="/simcards-asignadas">Asignar simcard punto de venta</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/simcards-asignadas">Asignar Simcard</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/intercambio">Intercambio</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('redes.consulta') }}">Consultar Red</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('dispositivos.consulta') }}">Consultar Activos</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('redes.consulta') }}">Consultar Red</a></li>
 
                             </ul>
                             <ul class="navbar-nav ms-auto">

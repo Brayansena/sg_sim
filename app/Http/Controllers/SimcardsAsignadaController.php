@@ -32,7 +32,7 @@ class SimcardsAsignadaController extends Controller
             ->join('users','simcards_asignadas_registradas.id_userCreador','=','users.id')
             ->join('simcards','simcards_asignadas_registradas.id_simcard','=','simcards.id')
             ->join('punto_ventas','simcards_asignadas_registradas.id_puntoVenta','=','punto_ventas.id')
-            ->select('simcards_asignadas_registradas.id','simcards_asignadas_registradas.observaciones','simcards.linea','punto_ventas.nombrePdv','punto_ventas.conexion','users.name','simcards_asignadas_registradas.estado','simcards_asignadas_registradas.fechaRegistro','simcards.id')
+            ->select('simcards_asignadas_registradas.id','simcards_asignadas_registradas.observaciones','simcards.linea','punto_ventas.nombrePdv','punto_ventas.conexion','users.name','simcards_asignadas_registradas.estado','simcards_asignadas_registradas.fechaRegistro','simcards_asignadas_registradas.id_puntoVenta','simcards.id')
             // ->where('simcards_asignadas_registradas.id_userCreador','=',$id)
             ->where('simcards.id','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
