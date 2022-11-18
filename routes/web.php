@@ -14,7 +14,7 @@ use App\Http\Controllers\DispositivoAsignadoController;
 use App\Http\Controllers\TipoDispositivoController;
 use App\Http\Controllers\SimcardsAsignadaController;
 use App\Http\Controllers\KashController;
-
+use App\Http\Controllers\AsignaDispositivoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -122,11 +122,26 @@ Route::patch('user/{user}',[UserController::class,'passwordUpdate'])->name('user
 
 Route::resource('dispositivos',App\Http\Controllers\DispositivoController::class);
 
+Route::patch('dispositivo/{dispositivo}',[DispositivoController::class,'updateuser'])->name('dispositivos.updateuser')->middleware('can:invenBode');
+
+Route::get('dispositivo/{dispositivo}/edituser',[DispositivoController::class,'edituser'])->name('dispositivos.edituser')->middleware('can:invenBode');
+
 Route::get('dispositivo/consulta',[DispositivoController::class,'consulta'])->name('dispositivos.consulta')->middleware('can:tecniBodeAdminInve');
 
 Route::get('dispositivo/exportar',[DispositivoController::class,'exportar'])->name('dispositivos.exportar')->middleware('can:invenBode');
 
 Route::post('dispositivo/importar',[DispositivoController::class,'importar'])->name('dispositivos.importar')->middleware('can:invenBode');
+
+Route::get('dispositivo/asignar',[AsignaDispositivoController::class,'asignarDispositivo'])->name('dispositivos.asignar')->middleware('can:invenBode');
+
+Route::get('dispositivo/estado',[AsignaDispositivoController::class,'estado'])->name('dispositivos.estado')->middleware('can:invenBode');
+
+Route::post('dispositivo/asignado',[AsignaDispositivoController::class,'asignadoDispositivo'])->name('dispositivos.asignado')->middleware('can:invenBode');
+
+Route::get('dispositivo/tecnico',[AsignaDispositivoController::class,'tecnico'])->name('dispositivos.tecnico')->middleware('can:tecnico');
+
+Route::post('dispositivo/tecnicoasignado',[AsignaDispositivoController::class,'tecnicoasignado'])->name('dispositivos.tecnicoasignado');
+
 
 
 Route::resource('dispositivo-asignados',App\Http\Controllers\DispositivoAsignadoController::class);

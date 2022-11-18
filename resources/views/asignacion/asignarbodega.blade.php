@@ -35,7 +35,7 @@
                                 <table class="table table-striped table-hover" style="width: 100% !important">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>No</th>
                                         <th>Cod Simcard</th>
                                         <th>linea</th>
                                         <th>Usuario Asignado</th>

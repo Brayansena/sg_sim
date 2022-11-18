@@ -25,6 +25,16 @@
                                 {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             @include('punto-venta.form')
+                            <div class="form-group">
+                                {{ Form::label('Estado') }}
+                                {{ Form::select('estado',$estados,$puntoVenta->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+                                {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                            <br>
+                        </div>
+                        <div class="box-footer mt20">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
 
                         </form>
                     </div>

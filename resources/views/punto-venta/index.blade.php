@@ -67,6 +67,7 @@
 										<th>Cc&nbspLider</th>
 										<th>Lider</th>
 										<th>User Creador</th>
+                                        <th>Estado</th>
 
                                     </tr>
                                 </thead>
@@ -86,6 +87,7 @@
 											<td>{{ $puntoVenta->ccLider }}</td>
 											<td>{{ $puntoVenta->lider }}</td>
 											<td>{{ $puntoVenta->name }}</td>
+                                            <td>{{ $puntoVenta->estado }}</td>
 
                                             <td>
                                                 <form class="eliminar" action="{{ route('punto-ventas.destroy',$puntoVenta->id) }}" method="POST">

@@ -62,7 +62,7 @@ class SimcardsAsignadaController extends Controller
         ->where('simcards.estado','Inactiva')
         ->where('simcards.id_userAsignado',$id)
         ->orderBy('id','asc')
-        ->paginate(10);
+        ->paginate(100000000000000);
         $simcards = $selesion->pluck('id','id');
         $puntoventa=PuntoVenta::pluck('nombrePdv','id');
         return view('simcards-asignada.create', compact('simcardsAsignada','simcards','puntoventa'));
@@ -144,13 +144,13 @@ class SimcardsAsignadaController extends Controller
     public function edit($id)
     {
         $simcardsAsignada = SimcardsAsignada::find($id);
-        $id = Auth::id();
+        $idu = Auth::id();
         $selesion = DB::table('simcards')
         ->select('id','linea')
         ->where('simcards.estado','Inactiva')
-        ->where('id_userAsignado',$id)
+        ->where('id_userAsignado',$idu)
         ->orderBy('id','asc')
-        ->paginate(10);
+        ->paginate(100000000000000);
         $simcards = $selesion->pluck('linea','id');
         $puntoventa=PuntoVenta::pluck('nombrePdv','id');
 

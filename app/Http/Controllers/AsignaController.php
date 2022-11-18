@@ -18,7 +18,7 @@ class AsignaController extends Controller
         $simcards = DB::table('simcards')
             ->join('users','simcards.id_userAsignado','=','users.id')
             ->select('simcards.id','simcards.linea','simcards.id_userAsignado','simcards.estado','users.name')
-            ->where('estado',0)
+            ->where('estado','Inactiva')
             ->where('simcards.id_userAsignado',1)
             ->where('simcards.id','LIKE','%'.$texto.'%')
             ->orderBy('simcards.id','asc')
@@ -105,7 +105,7 @@ class AsignaController extends Controller
         ->where('simcards.estado','Inactiva')
         ->where('id_userAsignado',$idu)
         ->orderBy('id','asc')
-        ->paginate(10);
+        ->paginate(100000000000000);
         $simcards = $selesion->pluck('id','id');
 
 

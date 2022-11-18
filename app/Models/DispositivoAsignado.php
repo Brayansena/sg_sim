@@ -23,9 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DispositivoAsignado extends Model
 {
-    
+
     static $rules = [
 		'registro' => 'required',
+        'numeroActa' => 'required',
 		'id_puntoVenta' => 'required',
 		'id_dispositivo' => 'required',
 		'id_userCreador' => 'required',
@@ -38,7 +39,7 @@ class DispositivoAsignado extends Model
      *
      * @var array
      */
-    protected $fillable = ['registro','id_puntoVenta','id_dispositivo','id_userCreador'];
+    protected $fillable = ['registro','id_puntoVenta','id_dispositivo','id_userCreador','numeroActa'];
 
 
     /**
@@ -48,7 +49,7 @@ class DispositivoAsignado extends Model
     {
         return $this->hasOne('App\Models\Dispositivo', 'id', 'id_dispositivo');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -56,7 +57,7 @@ class DispositivoAsignado extends Model
     {
         return $this->hasOne('App\Models\PuntoVenta', 'id', 'id_puntoVenta');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -64,6 +65,6 @@ class DispositivoAsignado extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_userCreador');
     }
-    
+
 
 }

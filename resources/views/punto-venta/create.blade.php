@@ -24,6 +24,11 @@
                                 {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             @include('punto-venta.form')
+                            <br>
+                        </div>
+                        <div class="box-footer mt20">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
 
                         </form>
                     </div>

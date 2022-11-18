@@ -68,7 +68,7 @@ if (isset($_GET["tipo"])) {
 
                                 <div class="form-group">
                                     {{ Form::label('estado') }}
-                                    {{ Form::select('estado',$estado,'', ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+                                    {{ Form::select('estado',$estado,'Disponible', ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
                                     {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <div class="form-group">
@@ -78,7 +78,7 @@ if (isset($_GET["tipo"])) {
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('Cod_PDV') }}
-                                    {{ Form::text('id_puntoVenta', '', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
+                                    {{ Form::text('id_puntoVenta', '1', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
                                     {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 @if ($tipo == 'torre'||$tipo == 'todo en uno'||$tipo == 'mini torre'||$tipo == 'portatil')
@@ -116,7 +116,7 @@ if (isset($_GET["tipo"])) {
                                 @endif
                                 <div class="form-group">
                                     {{ Form::label('User Asignado') }}
-                                    {{ Form::select('id_userAsignado', $users,'', ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
+                                    {{ Form::select('id_userAsignado', $users,3, ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
                                     {!! $errors->first('id_userAsignado', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <div class="form-group">
@@ -170,12 +170,12 @@ if (isset($_GET["tipo"])) {
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('Cod_PDV') }}
-                                    {{ Form::text('id_puntoVenta', '', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
+                                    {{ Form::text('id_puntoVenta', '1', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
                                     {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('User Asignado') }}
-                                    {{ Form::select('id_userAsignado', $users,'', ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
+                                    {{ Form::select('id_userAsignado', $users,3, ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
                                     {!! $errors->first('id_userAsignado', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <div class="form-group">
@@ -230,7 +230,7 @@ if (isset($_GET["tipo"])) {
                             </div>
                             <div class="form-group">
                                 {{ Form::label('Cod_PDV') }}
-                                {{ Form::text('id_puntoVenta', '', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
+                                {{ Form::text('id_puntoVenta', '1', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
                                 {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">
@@ -260,7 +260,7 @@ if (isset($_GET["tipo"])) {
                             </div>
                             <div class="form-group">
                                 {{ Form::label('User Asignado') }}
-                                {{ Form::select('id_userAsignado', $users,'', ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
+                                {{ Form::select('id_userAsignado', $users,3, ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
                                 {!! $errors->first('id_userAsignado', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">

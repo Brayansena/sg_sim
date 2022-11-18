@@ -3,7 +3,6 @@
 @section('template_title')
     Dispositivos
 @endsection
-
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -12,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex;align-items: center;flex-direction: row-reverse;justify-content: space-between;padding: 10px 5px 5px;">
-                            <form style="display: flex;align-items: center;flex-direction: row-reverse;" action="{{route('dispositivos.index') }}"  method="get" id="search">
+                            <form style="display: flex;align-items: center;flex-direction: row-reverse;" action="{{route('dispositivos.estado') }}"  method="get" id="search">
                               <div class="">
                                   <input type="submit" class="btn btn-dark btn-sm2" value="Buscar">
                                 </div>
@@ -21,28 +20,8 @@
                               </div>
                             </form>
                             <span style="font-size: 20px;">
-                                {{ __('Dispositivos') }}
+                                {{ __('Asignacion y Estados') }}
                             </span>
-                        </div>
-                        <div style="display: flex;justify-content: space-between;align-items: center;flex-direction: row-reverse;padding: 5px 5px 1px;">
-                             <div style="display: flex;flex-direction: row;">
-                                <a href="{{ route('dispositivos.exportar') }}" class="btn btn-warning btn-sm2 float-right"  data-placement="left">
-                                    {{ __('Exportar') }}
-                                  </a>
-                                <a href="{{ route('dispositivos.create') }}" class="btn btn-primary btn-sm2 float-right"  data-placement="left">
-                                  {{ __('Crear') }}
-                                </a>
-                              </div>
-                              @if(@Auth::user()->hasRole('inventario'))
-                              <form style="display: flex;flex-direction: row-reverse" action="{{ route('dispositivos.importar') }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <div class="file-select" id="src-file1" >
-                                    <input type="file" class="" name="file" aria-label="Archivo" required>
-                                  </div>
-
-                                  <button type="submit" class="btn btn-primary btn-sm2 float-right">Importar</button>
-                                </form>
-                              @endif
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -106,12 +85,8 @@
 
                                             <td>
                                                 <form class="eliminar" action="{{ route('dispositivos.destroy',$dispositivo->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('dispositivos.edit',$dispositivo->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('dispositivos.edituser',$dispositivo->id) }}"><i class="fa fa-fw fa-edit"></i> Asignar</a>
                                                     @csrf
-                                                    @if(@Auth::user()->hasRole('inventario'))
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                    @endif
                                                 </form>
                                             </td>
                                         </tr>

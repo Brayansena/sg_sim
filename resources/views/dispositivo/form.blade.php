@@ -2,7 +2,7 @@
     <div class="box-body">
         <div class="form-group">
             {{ Form::label('Activo') }}
-            {{ Form::text('id', $dispositivo->id, ['class' => 'form-control' . ($errors->has('id') ? ' is-invalid' : ''), 'placeholder' => 'Activo']) }}
+            {{ Form::label('id', $dispositivo->id, ['class' => 'form-control' . ($errors->has('id') ? ' is-invalid' : ''), 'placeholder' => 'Activo']) }}
             {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -12,7 +12,7 @@
         </div>
        <div class="form-group">
             {{ Form::label('serial') }}
-            {{ Form::text('serial', $dispositivo->serial, ['class' => 'form-control' . ($errors->has('serial') ? ' is-invalid' : ''), 'placeholder' => 'Serial']) }}
+            {{ Form::label('serial', $dispositivo->serial, ['class' => 'form-control' . ($errors->has('serial') ? ' is-invalid' : ''), 'placeholder' => 'Serial']) }}
             {!! $errors->first('serial', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -22,17 +22,22 @@
         </div>
         <div class="form-group">
             {{ Form::label('Cod_PDV') }}
-            {{ Form::text('id_puntoVenta', $dispositivo->id_puntoVenta, ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
+            {{ Form::label('id_puntoVenta', $dispositivo->id_puntoVenta, ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
             {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('estado') }}
-            {{ Form::text('estado',$dispositivo->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+            {{ Form::label('estado',$dispositivo->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        {{-- <div class="form-group">
+            {{ Form::label('estado') }}
+            {{ Form::label('estado',$dispositivo->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+            {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
+        </div> --}}
         <div class="form-group">
             {{ Form::label('numero Acta') }}
-            {{ Form::text('numeroActa', $dispositivo->numeroActa, ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta']) }}
+            {{ Form::label('numeroActa', $dispositivo->numeroActa, ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta']) }}
             {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -60,6 +65,11 @@
             {{ Form::text('imei', $dispositivo->imei, ['class' => 'form-control' . ($errors->has('imei') ? ' is-invalid' : ''), 'placeholder' => 'Imei']) }}
             {!! $errors->first('imei', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        {{-- <div class="form-group">
+            {{ Form::label('User Asignado') }}
+            {{ Form::select('id_userAsignado', $users,$dispositivo->id_userAsignado, ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
+            {!! $errors->first('id_userAsignado', '<div class="invalid-feedback">:message</div>') !!}
+        </div> --}}
         <div class="form-group">
             {{ Form::label('observacion') }}
             {{ Form::text('observacion', $dispositivo->observacion, ['class' => 'form-control' . ($errors->has('observacion') ? ' is-invalid' : ''), 'placeholder' => 'Observacion']) }}

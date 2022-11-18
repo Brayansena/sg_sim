@@ -99,6 +99,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/dispositivos">Dispositivo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivo/asignar">Reasignar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivo/estado">Estado</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('dispositivos.consulta') }}">Consultar Activos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
@@ -157,9 +159,11 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="/bodegas">Asignacion</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/estado">Estado de simcards</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/dispositivos">Activos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/bodegas">Asignar Simcard</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/estado">Reasignar Simcard</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/dispositivos">Dispositivo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivo/asignar">Reasignar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivo/estado">Estado</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>
                         </ul>
@@ -218,7 +222,8 @@
                         <div class="collapse navbar-collapse" id="navbarResponsive">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item"><a class="nav-link" href="/simcards-asignadas">Asignar Simcard</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/intercambio">Intercambio</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/intercambio">Intercambio Simcard</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/dispositivo/tecnico">Asignar Dispositivo</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('dispositivos.consulta') }}">Consultar Activos</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>

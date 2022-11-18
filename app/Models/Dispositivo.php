@@ -33,7 +33,11 @@ class Dispositivo extends Model
         'id' => 'required',
         'estado' => 'required',
 		'tipoDispositivo' => 'required',
-		'id_puntoVenta' => 'required',
+        'id_userAsignado' => 'required',
+        'numeroActa' => 'required',
+    ];
+    static $rules2 = [
+        'id' => 'required',
         'id_userAsignado' => 'required',
         'numeroActa' => 'required',
     ];

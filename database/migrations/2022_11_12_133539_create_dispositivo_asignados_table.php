@@ -23,6 +23,11 @@ class CreateDispositivoAsignadosTable extends Migration
             $table->unsignedBigInteger('id_dispositivo');
             $table->foreign('id_dispositivo')->references('id')->on('dispositivos')->onUpdate('cascade')->onDelete('cascade');
 
+            $table->string('numeroActa')->nullable();
+
+            $table->unsignedBigInteger('id_userAsignado');
+            $table->foreign('id_userAsignado')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+
             $table->unsignedBigInteger('id_userCreador');
             $table->foreign('id_userCreador')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 

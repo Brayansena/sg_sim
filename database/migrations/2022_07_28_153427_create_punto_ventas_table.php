@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('cordinador');
             $table->string('ccLider');
             $table->string('lider');
+            $table->string('estado')->default('Activo');
 
 
             // $table->unsignedBigInteger('id_municipio');

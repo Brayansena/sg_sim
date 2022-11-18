@@ -14,6 +14,7 @@ use App\Models\Estado;
 use App\Exports\DispositivoExport;
 use App\Imports\DispositivoImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\DispositivoAsignado;
 
 /**
  * Class DispositivoController
@@ -30,9 +31,9 @@ class DispositivoController extends Controller
     {
         $texto=trim($request->get('texto'));
         $dispositivos = DB::table('dispositivos')
-            ->join('users','dispositivos.id_userCreador','=','users.id')
+            ->join('users','dispositivos.id_userAsignado','=','users.id')
             ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
-            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad')
+            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
@@ -74,7 +75,7 @@ class DispositivoController extends Controller
         $dispositivo = new Dispositivo();
         $selesion = DB::table('users')
         ->select('id','name')
-        ->where('id','>=', 2)
+        ->where('id','>=', 3)
         ->orderBy('id','asc')
         ->paginate(1000000);
         $users = $selesion->pluck('name','id');
@@ -95,15 +96,22 @@ class DispositivoController extends Controller
         $idu = Auth::id();
         $dispositivo->id_userCreador=$idu;
         $dispositivo->save();
-        if ($dispositivo->id_puntoVenta==1) {
-            return redirect()->route('dispositivos.index')
-            ->with('success', 'Dispositivo creado satisfactoriamente.');
-        } else {
-            # code...
-        }
 
 
+        $estado=$request->input('estado');
+        $dispositivoAsignado = new DispositivoAsignado;;
+        $idu = Auth::id();
+        $dispositivoAsignado->id_userCreador=$idu;
+        $dispositivoAsignado->id_userAsignado=$request->input('id_userAsignado');
+        $dispositivoAsignado->id_dispositivo=$request->input('id');
+        $dispositivoAsignado->id_puntoVenta=$request->input('id_puntoVenta');
+        $dispositivoAsignado->registro=$request->input('estado');
+        $dispositivoAsignado->numeroActa=$request->input('numeroActa');
+        $dispositivoAsignado->save();
 
+
+        return redirect()->route('dispositivos.index')
+        ->with('success', 'Dispositivo creado satisfactoriamente.');
     }
 
     /**
@@ -127,10 +135,16 @@ class DispositivoController extends Controller
      */
     public function edit($id)
     {
+        $selesion = DB::table('users')
+        ->select('id','name')
+        ->where('id','>=', 3)
+        ->orderBy('id','asc')
+        ->paginate(1000000);
+        $users = $selesion->pluck('name','id');
         $dispositivo = Dispositivo::find($id);
         $tipoDispositivo=TipoDispositivo::pluck('dispositivo','dispositivo');
         $estado=Estado::pluck('estado','estado');
-        return view('dispositivo.edit', compact('dispositivo','tipoDispositivo','estado'));
+        return view('dispositivo.edit', compact('users','dispositivo','tipoDispositivo','estado'));
     }
 
     /**
@@ -145,6 +159,11 @@ class DispositivoController extends Controller
         $dispositivo=Dispositivo::findOrFail($id);
 
         $dispositivo->update($request->all());
+        $idu = Auth::id();
+        $dispositivo->id_userCreador=$idu;
+        $dispositivo->save();
+
+
 
         return redirect()->route('dispositivos.index')
             ->with('success', 'Dispositivo actualizado satisfactoriamente');
@@ -177,15 +196,53 @@ class DispositivoController extends Controller
     {
         $texto=trim($request->get('texto'));
         $dispositivos = DB::table('dispositivos')
-            ->join('users','dispositivos.id_userCreador','=','users.id')
+            ->join('users','dispositivos.id_userAsignado','=','users.id')
             ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
-            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at')
+            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
 
-        return view('dispositivo.consulta', compact('dispositivos','texto'))
+        return view('dispositivo.index', compact('dispositivos','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
+    public function edituser($id)
+    {
+        $selesion = DB::table('users')
+        ->select('id','name')
+        ->where('id','>=', 3)
+        ->orderBy('id','asc')
+        ->paginate(1000000);
+        $users = $selesion->pluck('name','id');
+        $dispositivo = Dispositivo::find($id);
+        $estado=Estado::pluck('estado','estado');
+        $tipoDispositivo=TipoDispositivo::pluck('dispositivo','dispositivo');
+        $estado=Estado::pluck('estado','estado');
+        return view('dispositivo.edituser', compact('estado','users','dispositivo','tipoDispositivo','estado'));
+    }
+    public function updateuser(Request $request, $id)
+    {
+        $dispositivoAsignado = new DispositivoAsignado;;
+        $idu = Auth::id();
+        $dispositivoAsignado->id_userCreador=$idu;
+        $dispositivoAsignado->id_userAsignado=$request->input('id_userAsignado');
+        $dispositivoAsignado->id_dispositivo=$id;
+        $dispositivoAsignado->id_puntoVenta=1;
+        $dispositivoAsignado->registro=$request->input('estado');
+        $dispositivoAsignado->numeroActa=$request->input('numeroActa');
+        $dispositivoAsignado->save();
+
+
+        $dispositivo=Dispositivo::findOrFail($id);
+
+        $dispositivo->id_userAsignado=$request->input('id_userAsignado');
+        $dispositivo->numeroActa=$request->input('numeroActa');
+        $dispositivo->estado=$request->input('estado');
+        $dispositivo->save();
+
+        return redirect()->route('dispositivos.estado')
+            ->with('success', 'Dispositivo actualizado satisfactoriamente');
+        }
+
 }

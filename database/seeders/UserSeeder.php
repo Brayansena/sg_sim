@@ -495,9 +495,6 @@ class UserSeeder extends Seeder
             'estado' => 'Disponible',
         ]);
         Estado::create([
-            'estado' => 'Asignado',
-        ]);
-        Estado::create([
             'estado' => 'Reparacion',
         ]);
         Estado::create([

@@ -28,7 +28,7 @@
                         {{ csrf_field() }}
                         <div style="display: flex;justify-content: space-between;align-items: center;flex-direction: row-reverse;padding: 5px 5px 1px;">
                         <div class="float-right">
-                            <input type="submit" class="btn btn-primary waves-effect" value="Asignar a Bodega">
+                            <input type="submit" class="btn btn-primary waves-effect" value="Reasignar Simcard">
                         </div>
                         </div>
                         <div class="table-responsive">

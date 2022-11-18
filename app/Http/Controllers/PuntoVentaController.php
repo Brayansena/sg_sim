@@ -33,7 +33,7 @@ class PuntoVentaController extends Controller
         $texto=trim($request->get('texto'));
         $puntoVentas = DB::table('punto_ventas')
             ->join('users','punto_ventas.id_userCreador','=','users.id')
-            ->select('users.name','punto_ventas.id','punto_ventas.nombrePdv','punto_ventas.direccion','punto_ventas.zona','punto_ventas.municipio','punto_ventas.canal','punto_ventas.conexion','punto_ventas.cordinador','punto_ventas.jefeComercial','punto_ventas.lider','punto_ventas.ccLider','punto_ventas.ccCordinador')
+            ->select('users.name','punto_ventas.id','punto_ventas.nombrePdv','punto_ventas.direccion','punto_ventas.zona','punto_ventas.municipio','punto_ventas.canal','punto_ventas.conexion','punto_ventas.cordinador','punto_ventas.jefeComercial','punto_ventas.lider','punto_ventas.ccLider','punto_ventas.ccCordinador','punto_ventas.estado')
             ->where('punto_ventas.id','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.conexion','LIKE','%'.$texto.'%')
@@ -50,6 +50,7 @@ class PuntoVentaController extends Controller
      */
     public function create()
     {
+
         $puntoVenta = new PuntoVenta();
         $zonas=Zona::pluck('zona','zona');
         $municipios=Municipio::pluck('municipio','municipio');
@@ -94,6 +95,12 @@ class PuntoVentaController extends Controller
      */
     public function edit($id)
     {
+        $collectionEstado = collect([
+            ['id' => 'Activo', 'na' => 'Activo'],
+            ['id' => 'Inactivo', 'na' => 'Inactivo'],
+        ]);
+        $estados = $collectionEstado->pluck('id','na');
+        $estados->all();
         $puntoVenta = PuntoVenta::find($id);
         $zonas=Zona::pluck('zona','zona');
         $municipios=Municipio::pluck('municipio','municipio');
@@ -101,7 +108,7 @@ class PuntoVentaController extends Controller
         $conexiones=Conexione::pluck('conexion','conexion');
         $canales=Canale::pluck('canal','canal');
 
-        return view('punto-venta.edit', compact('puntoVenta','zonas','municipios','regionales','conexiones','canales'));
+        return view('punto-venta.edit', compact('estados','puntoVenta','zonas','municipios','regionales','conexiones','canales'));
     }
 
     /**
@@ -152,7 +159,7 @@ class PuntoVentaController extends Controller
         $texto=trim($request->get('texto'));
         $puntoVentas = DB::table('punto_ventas')
             ->join('users','punto_ventas.id_userCreador','=','users.id')
-            ->select('users.name','punto_ventas.id','punto_ventas.nombrePdv','punto_ventas.direccion','punto_ventas.zona','punto_ventas.municipio','punto_ventas.canal','punto_ventas.conexion','punto_ventas.cordinador','punto_ventas.jefeComercial','punto_ventas.lider','punto_ventas.ccLider','punto_ventas.ccCordinador')
+            ->select('users.name','punto_ventas.id','punto_ventas.nombrePdv','punto_ventas.direccion','punto_ventas.zona','punto_ventas.municipio','punto_ventas.canal','punto_ventas.conexion','punto_ventas.cordinador','punto_ventas.jefeComercial','punto_ventas.lider','punto_ventas.ccLider','punto_ventas.ccCordinador','punto_ventas.estado')
             ->where('punto_ventas.id','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.conexion','LIKE','%'.$texto.'%')
