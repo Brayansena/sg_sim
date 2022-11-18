@@ -35,6 +35,7 @@ class SimcardsAsignadaController extends Controller
             ->select('simcards_asignadas_registradas.id','simcards_asignadas_registradas.observaciones','simcards.linea','punto_ventas.nombrePdv','punto_ventas.conexion','users.name','simcards_asignadas_registradas.estado','simcards_asignadas_registradas.fechaRegistro','simcards_asignadas_registradas.id_puntoVenta','simcards.id')
             // ->where('simcards_asignadas_registradas.id_userCreador','=',$id)
             ->where('simcards.id','LIKE','%'.$texto.'%')
+            ->orWhere('simcards_asignadas_registradas.id_puntoVenta','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
             ->orderBy('simcards_asignadas_registradas.estado','asc')
             ->paginate(100000000000000);

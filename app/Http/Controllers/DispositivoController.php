@@ -68,6 +68,17 @@ class DispositivoController extends Controller
         $router = $collectionRouter->pluck('id','na');
         $router->all();
 
+        $collectionEstado = collect([
+            ['id' => 'Asignado', 'na' => 'Asignado'],
+            ['id' => 'Disponible', 'na' => 'Disponible'],
+            ['id' => 'Reparacion', 'na' => 'Reparacion'],
+            ['id' => 'Garantia', 'na' => 'Garantia'],
+            ['id' => 'De Baja', 'na' => 'De Baja'],
+            ['id' => 'Revision', 'na' => 'Revision'],
+        ]);
+        $estado = $collectionEstado->pluck('id','na');
+        $estado->all();
+
 
 
 
@@ -79,7 +90,6 @@ class DispositivoController extends Controller
         ->orderBy('id','asc')
         ->paginate(1000000);
         $users = $selesion->pluck('name','id');
-        $estado=Estado::pluck('estado','estado');
         $tipoPluck=TipoDispositivo::pluck('dispositivo','dispositivo');
         $tipoDispositivos=DB::table('tipo_dispositivos')
         ->select('id','dispositivo')

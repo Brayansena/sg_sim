@@ -49,7 +49,7 @@ class AsignaController extends Controller
         $simcards = DB::table('simcards')
             ->join('users','simcards.id_userAsignado','=','users.id')
             ->select('simcards.estado','simcards.id','simcards.linea','users.name')
-            ->where('simcards.estado','=','Activa')
+            ->where('simcards.id_userAsignado','>=',4)
             ->Where('simcards.linea','LIKE','%'.$texto.'%')
             ->Where('simcards.id','LIKE','%'.$texto.'%')
             ->paginate(100000000000000);
