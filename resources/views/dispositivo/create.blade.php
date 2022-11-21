@@ -125,7 +125,7 @@ if (isset($_GET["tipo"])) {
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('numero Acta') }}
-                                    {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta']) }}
+                                    {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Acta de Entrada']) }}
                                     {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <div class="form-group">
@@ -179,7 +179,7 @@ if (isset($_GET["tipo"])) {
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('numero Acta') }}
-                                    {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta']) }}
+                                    {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Acta de Entrada']) }}
                                     {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 </div>
@@ -239,7 +239,7 @@ if (isset($_GET["tipo"])) {
                             </div>
                             <div class="form-group">
                                 {{ Form::label('numero Acta') }}
-                                {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta']) }}
+                                {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Acta de Entrada']) }}
                                 {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">

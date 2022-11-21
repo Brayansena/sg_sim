@@ -25,10 +25,15 @@
                         <form method="POST" action="{{ route('dispositivos.asignado') }}">
                             {{ csrf_field() }}
                             <div style="display: flex;justify-content: space-between;align-items: center;flex-direction: row-reverse;padding: 5px 5px 1px;">
-                            <div class="float-right">
-                                <input type="submit" class="btn btn-primary waves-effect" value="Reasignar">
+                                <div class="float-right">
+                                    <input type="submit" class="btn btn-primary waves-effect" value="Reasignar">
+                                </div>
                             </div>
-                            </div>
+                            @if ($errors->has ('reasignar'))
+                                    <div class="alert alert-success">
+                                    <span class="error text-primary" for="input-name">{{ $errors->first('reasignar') }}</span>
+                                    </div>
+                                    @endif
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover" style="width: 100% !important">
                                 <thead>
@@ -61,7 +66,7 @@
                                     @foreach ( $dispositivos as $dispositivo )
                                     <tr>
                                         <td>
-                                            <input type="radio" value="{{ $dispositivo->id }}" id="{{ $dispositivo->id }}" name="reasignar[]" required>
+                                            <input type="checkbox" value="{{ $dispositivo->id }}" id="{{ $dispositivo->id }}" name="reasignar[]">
                                         </td>
                                         <td>{{ $dispositivo->modelo }}</td>
 											<td>{{ $dispositivo->id }}</td>

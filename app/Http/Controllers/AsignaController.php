@@ -30,7 +30,12 @@ class AsignaController extends Controller
     public function asignadoBodega(Request $request)
     {
         $asignars = $request->asignando;
-
+        $request->validate([
+            'asignando' => 'required',
+        ],
+        [
+            'asignando.required' => 'Selecione una Casilla'
+        ]);
         foreach ($asignars as $asignar){
             Simcard::where('id',$asignar)->update(['id_userAsignado'=>3]);
         }
@@ -45,11 +50,12 @@ class AsignaController extends Controller
 
     public function estado(Request $request)
     {
+        $idu = Auth::id();
         $texto=trim($request->get('texto'));
         $simcards = DB::table('simcards')
             ->join('users','simcards.id_userAsignado','=','users.id')
             ->select('simcards.estado','simcards.id','simcards.linea','users.name')
-            ->where('simcards.id_userAsignado','>=',4)
+            ->where('simcards.id_userAsignado','>',$idu)
             ->Where('simcards.linea','LIKE','%'.$texto.'%')
             ->Where('simcards.id','LIKE','%'.$texto.'%')
             ->paginate(100000000000000);
@@ -61,7 +67,12 @@ class AsignaController extends Controller
     public function estadobodega(Request $request)
     {
         $activars = $request->activado;
-
+        $request->validate([
+            'activado' => 'required',
+        ],
+        [
+            'activado.required' => 'Selecione una Casilla'
+        ]);
 
 
         foreach ($activars as $activar){

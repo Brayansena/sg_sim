@@ -35,6 +35,12 @@ class AsignaDispositivoController extends Controller
     public function asignadoDispositivo(Request $request)
     {
         $idu = Auth::id();
+        $request->validate([
+            'reasignar' => 'required',
+        ],
+        [
+            'reasignar.required' => 'Selecione una Casilla'
+        ]);
         $reasignars = $request->reasignar;
         foreach ($reasignars as $reasignar){
             Dispositivo::where('id',$reasignar)->update(['id_userAsignado'=>3,'id_puntoVenta'=>1,'estado'=>'Disponible','id_userCreador'=>$idu]);
