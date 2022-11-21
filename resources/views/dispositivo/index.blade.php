@@ -22,6 +22,7 @@
                             </form>
                             <span style="font-size: 20px;">
                                 {{ __('Dispositivos') }}
+                                <h4 class="text-primary">Total {{ $dispositivoc->count() }}</h4>
                             </span>
                         </div>
                         <div style="display: flex;justify-content: space-between;align-items: center;flex-direction: row-reverse;padding: 5px 5px 1px;">
@@ -43,6 +44,7 @@
                                   <button type="submit" class="btn btn-primary btn-sm2 float-right">Importar</button>
                                 </form>
                               @endif
+
                         </div>
                     </div>
                     @if ($message = Session::get('success'))

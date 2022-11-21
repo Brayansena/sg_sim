@@ -34,6 +34,7 @@
                                   <button type="submit" class="btn btn-primary btn-sm2 float-right">Importar</button>
                                 </form>
                               @endif
+                              <h4 class="text-primary">Total {{ $dispositivoc->count() }}</h4>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))

@@ -37,6 +37,12 @@ class PuntoVentaController extends Controller
             ->where('punto_ventas.id','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.conexion','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.zona','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.municipio','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.jefeComercial','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.cordinador','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.lider','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.estado','LIKE','%'.$texto.'%')
             ->orderBy('punto_ventas.id','asc')
             ->paginate(1000000000000000000000);
 
@@ -163,6 +169,12 @@ class PuntoVentaController extends Controller
             ->where('punto_ventas.id','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.conexion','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.zona','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.municipio','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.jefeComercial','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.cordinador','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.lider','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.estado','LIKE','%'.$texto.'%')
             ->orderBy('punto_ventas.id','asc')
             ->paginate(1000000000000000000000);
 

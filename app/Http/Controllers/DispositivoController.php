@@ -36,10 +36,29 @@ class DispositivoController extends Controller
             ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.tipoDispositivo','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.numeroActa','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.modelo','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
+            $dispositivoc = DB::table('dispositivos')
+            ->join('users','dispositivos.id_userAsignado','=','users.id')
+            ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
+            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
+            ->where('dispositivos.id','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.tipoDispositivo','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.numeroActa','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.modelo','LIKE','%'.$texto.'%')
+            ->get();
 
-        return view('dispositivo.index', compact('dispositivos','texto'))
+
+
+        return view('dispositivo.index', compact('dispositivoc','dispositivos','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
 
@@ -211,10 +230,27 @@ class DispositivoController extends Controller
             ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.tipoDispositivo','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.numeroActa','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.modelo','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
+            $dispositivoc = DB::table('dispositivos')
+            ->join('users','dispositivos.id_userAsignado','=','users.id')
+            ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
+            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
+            ->where('dispositivos.id','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.tipoDispositivo','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.numeroActa','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.modelo','LIKE','%'.$texto.'%')
+            ->get();
 
-        return view('dispositivo.index', compact('dispositivos','texto'))
+        return view('dispositivo.index', compact('dispositivoc','dispositivos','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
     public function edituser($id)

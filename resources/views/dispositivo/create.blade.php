@@ -9,7 +9,6 @@
 <?php
 if (isset($_GET["tipo"])) {
     $tipo = $_GET["tipo"];
-    echo $tipo;
 } else {
 }
 ?>
