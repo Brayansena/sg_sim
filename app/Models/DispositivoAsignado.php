@@ -25,11 +25,8 @@ class DispositivoAsignado extends Model
 {
 
     static $rules = [
-		'registro' => 'required',
-        'numeroActa' => 'required',
-		'id_puntoVenta' => 'required',
-		'id_dispositivo' => 'required',
-		'id_userCreador' => 'required',
+        'numeroActa' => 'required|unique:dispositivos,numeroActa',
+        'id' => 'required',
     ];
 
     protected $perPage = 20;

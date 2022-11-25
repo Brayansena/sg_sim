@@ -81,7 +81,14 @@ class AsignaDispositivoController extends Controller
 
     public function tecnicoasignado(Request $request)
     {
+        request()->validate(DispositivoAsignado::$rules);
 
+        $request->validate([
+            'id_puntoVenta' => 'required|exists:punto_ventas,id',
+        ],
+        [
+            'id_puntoVenta.exists' => 'Codigo del punto de venta no existe'
+        ]);
         $dispositivoAsignado = new DispositivoAsignado;;
         $idu = Auth::id();
         $dispositivoAsignado->id_userCreador=$idu;

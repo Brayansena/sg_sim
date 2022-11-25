@@ -23,17 +23,8 @@
                                 {{ __('Dispositivos') }}
                             </span>
                         </div>
-                        <div style="display: flex;justify-content: space-between;align-items: center;flex-direction: row-reverse;padding: 5px 5px 1px;">
-                              @if(@Auth::user()->hasRole('inventario'))
-                              <form style="display: flex;flex-direction: row-reverse" action="{{ route('dispositivos.importar') }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <div class="file-select" id="src-file1" >
-                                    <input type="file" class="" name="file" aria-label="Archivo" required>
-                                  </div>
+                        <div style="display: flex;justify-content: space-between;align-items: center;padding: 5px 5px 1px;">
 
-                                  <button type="submit" class="btn btn-primary btn-sm2 float-right">Importar</button>
-                                </form>
-                              @endif
                               <h4 class="text-primary">Total {{ $dispositivoc->count() }}</h4>
                         </div>
                     </div>
@@ -73,8 +64,9 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
                                     @foreach ($dispositivos as $dispositivo)
+                                    @foreach ($users[$dispositivo->id_userCreador=$dispositivo->id_userCreador-1] as $user)
+
                                         <tr>
                                             <td>{{ $dispositivo->modelo }}</td>
 											<td>{{ $dispositivo->id }}</td>
@@ -93,11 +85,16 @@
 
                                             <td>{{ $dispositivo->name }}</td>
 											<td>{{ $dispositivo->observacion }}</td>
-											<td>{{ $dispositivo->id_userCreador }}</td>
+
+                                            <td>{{ $user }}</td>
+
+
                                             <td>{{ $dispositivo->updated_at }}</td>
 
+
                                         </tr>
-                                    @endforeach
+                                        @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>

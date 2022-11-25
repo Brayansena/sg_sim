@@ -30,6 +30,10 @@ class DispositivoController extends Controller
     public function index(Request $request)
     {
         $texto=trim($request->get('texto'));
+        $users = DB::table('users')
+            ->select('name')
+            ->orderBy('id','asc')
+            ->paginate(100000000000);
         $dispositivos = DB::table('dispositivos')
             ->join('users','dispositivos.id_userAsignado','=','users.id')
             ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
@@ -58,7 +62,7 @@ class DispositivoController extends Controller
 
 
 
-        return view('dispositivo.index', compact('dispositivoc','dispositivos','texto'))
+        return view('dispositivo.index', compact('users','dispositivoc','dispositivos','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
 
@@ -223,6 +227,10 @@ class DispositivoController extends Controller
     }
     public function consulta(Request $request)
     {
+        $users = DB::table('users')
+            ->select('name')
+            ->orderBy('id','asc')
+            ->paginate(100000000000);
         $texto=trim($request->get('texto'));
         $dispositivos = DB::table('dispositivos')
             ->join('users','dispositivos.id_userAsignado','=','users.id')
@@ -250,7 +258,7 @@ class DispositivoController extends Controller
             ->orWhere('dispositivos.modelo','LIKE','%'.$texto.'%')
             ->get();
 
-        return view('dispositivo.index', compact('dispositivoc','dispositivos','texto'))
+        return view('dispositivo.consulta', compact('users','dispositivoc','dispositivos','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
     public function edituser($id)

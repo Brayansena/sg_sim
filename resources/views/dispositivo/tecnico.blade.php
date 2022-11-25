@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Actualizar Dispositivo
+    Asignar a PDV
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Asignar Dispositivo</span>
+                        <span class="card-title">Asignar a PDV</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('dispositivos.tecnicoasignado', $dispositivo->id) }}"  role="form" enctype="multipart/form-data">
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('numero Acta') }}
-                                    {{ Form::text('numeroActa', $dispositivo->numeroActa, ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta']) }}
+                                    {{ Form::text('numeroActa', $dispositivo->numeroActa, ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Acta de Salida']) }}
                                     {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <br>

@@ -87,11 +87,19 @@ class UserController extends Controller
         return view('users.password', compact('user','roles'));
     }
     public function passwordUpdate(Request $request, $id) {
+        $password=$request->password;
+        $confirmpassword=$request->confirmpassword;
+        $passwordCount=count(explode(" ", $password));
+        if ($password==$confirmpassword) {
+            if ($passwordCount>7) {
+                User::where('id',$id)->update(['password'=>Hash::make($request->password)]);
+                return redirect()->route('users.index')
+                ->with('success', 'Se cambio la contraseña satisfactoriamente');
+            } else {
+                return redirect()->back()->with('success', 'Como minimo 8 caracteres');
+            }
 
-        if ($request->password==$request->confirmpassword) {
-        User::where('id',$id)->update(['password'=>Hash::make($request->password)]);
-        return redirect()->route('users.index')
-        ->with('success', 'Se cambio la contraseña satisfactoriamente');
+
     } else {
 
         return redirect()->back()->with('success', 'La contraseña no coincide');

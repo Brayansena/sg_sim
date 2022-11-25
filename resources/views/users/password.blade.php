@@ -11,6 +11,11 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-primary">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
                 <div class="card-body">
 
                     <p class="h5">Nombre</p>
@@ -21,12 +26,12 @@
 
                         <div class="form-group">
                             {{ Form::label('password') }}
-                            {{ Form::text('password', '',['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'Password']) }}
+                            {{ Form::password('password',['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'Password']) }}
                             {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
                         </div>
                         <div class="form-group">
                             {{ Form::label('Confirmar Password') }}
-                            {{ Form::text('confirmpassword', '',['class' => 'form-control' . ($errors->has('confirmpassword') ? ' is-invalid' : ''), 'placeholder' => 'Confirmar Password']) }}
+                            {{ Form::password('confirmpassword',['class' => 'form-control' . ($errors->has('confirmpassword') ? ' is-invalid' : ''), 'placeholder' => 'Confirmar Password']) }}
                             {!! $errors->first('confirmpassword', '<div class="invalid-feedback">:message</div>') !!}
                         </div>
                             <br>

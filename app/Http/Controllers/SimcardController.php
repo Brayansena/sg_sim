@@ -25,6 +25,10 @@ class SimcardController extends Controller
     public function index(Request $request)
     {
         $texto=trim($request->get('texto'));
+        $users = DB::table('users')
+            ->select('name')
+            ->orderBy('id','asc')
+            ->paginate(100000000000);
         $simcards = DB::table('simcards')
             ->join('users','simcards.id_userAsignado','=','users.id')
             ->select('simcards.id','simcards.linea','simcards.apn','simcards.usuario','simcards.clave','simcards.planAsignado','simcards.fechaCorte','simcards.estado','simcards.id_userAsignado','simcards.operador','simcards.id_userCreador','users.name','simcards.updated_at')
@@ -35,7 +39,7 @@ class SimcardController extends Controller
             ->orderBy('id','desc')
             ->paginate(100000000000);
 
-        return view('simcard.index', compact('simcards','texto'))
+        return view('simcard.index', compact('users','simcards','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $simcards->perPage());
     }
 
@@ -141,6 +145,10 @@ class SimcardController extends Controller
     public function consulta(Request $request)
     {
         $texto=trim($request->get('texto'));
+        $users = DB::table('users')
+            ->select('name')
+            ->orderBy('id','asc')
+            ->paginate(100000000000);
         $simcards = DB::table('simcards')
             ->join('users','simcards.id_userAsignado','=','users.id')
             ->select('simcards.id','simcards.linea','simcards.apn','simcards.usuario','simcards.clave','simcards.planAsignado','simcards.fechaCorte','simcards.estado','simcards.id_userAsignado','simcards.operador','simcards.id_userCreador','users.name','simcards.updated_at')
@@ -151,7 +159,7 @@ class SimcardController extends Controller
             ->orderBy('id','desc')
             ->paginate(100000000000);
 
-        return view('simcard.consulta', compact('simcards','texto'))
+        return view('simcard.consulta', compact('users','simcards','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $simcards->perPage());
     }
 

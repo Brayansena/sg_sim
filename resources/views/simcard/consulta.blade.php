@@ -53,6 +53,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($simcards as $simcard)
+                                @foreach ($users[$simcard->id_userCreador=$simcard->id_userCreador-1] as $user)
                                     <tr>
                                         <td>{{ $simcard->id }}</td>
 
@@ -65,10 +66,12 @@
                                         <td>{{ $simcard->estado }}</td>
                                         <td>{{ $simcard->name }}</td>
                                         <td>{{ $simcard->operador }}</td>
-                                        <td>{{ $simcard->id_userCreador }}</td>
+                                        <td>{{ $user }}</td>
                                         <td>{{ $simcard->updated_at }}</td>
 
+
                                     </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

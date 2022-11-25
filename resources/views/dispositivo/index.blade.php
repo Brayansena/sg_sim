@@ -83,8 +83,9 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
                                     @foreach ($dispositivos as $dispositivo)
+                                    @foreach ($users[$dispositivo->id_userCreador=$dispositivo->id_userCreador-1] as $user)
+
                                         <tr>
                                             <td>{{ $dispositivo->modelo }}</td>
 											<td>{{ $dispositivo->id }}</td>
@@ -103,7 +104,10 @@
 
                                             <td>{{ $dispositivo->name }}</td>
 											<td>{{ $dispositivo->observacion }}</td>
-											<td>{{ $dispositivo->id_userCreador }}</td>
+
+                                            <td>{{ $user }}</td>
+
+
                                             <td>{{ $dispositivo->updated_at }}</td>
 
                                             <td>
@@ -117,7 +121,8 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                        @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
