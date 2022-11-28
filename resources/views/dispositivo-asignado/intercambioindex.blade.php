@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Dispositivo Asignado
+    Simcards Asignada
 @endsection
 
 @section('content')
@@ -10,18 +10,29 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Dispositivo Asignado') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('dispositivo-asignados.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
+                        <div style="display: flex;align-items: center;flex-direction: row-reverse;justify-content: space-between;padding: 10px 5px 5px;">
+                            <form style="display: flex;align-items: center;flex-direction: row-reverse;" action="{{route('intercambio.index') }}"  method="get" id="search">
+                              <div class="">
+                                  <input type="submit" class="btn btn-dark btn-sm2" value="Buscar">
+                                </div>
+                              <div class="">
+                                <input type="text" class="form-control" name="texto" value="{{ $texto }}">
                               </div>
+                            </form>
+                            <span style="font-size: 20px;">
+                                {{ __('Dispositivos Asignados') }}
+                            </span>
                         </div>
+                        <div style="display: flex;justify-content: space-between;align-items: center;flex-direction: row-reverse;padding: 5px 5px 1px;">
+                            <div style="display: flex;flex-direction: row" class="float-right">
+                               <a href="{{ route('dispositivos.salida') }}" class="btn btn-warning btn-sm2 float-right"  data-placement="left">
+                                   {{ __('Activo Salida') }}
+                                 </a>
+                               <a href="{{ route('dispositivos.entrada') }}" class="btn btn-primary btn-sm2 float-right"  data-placement="left">
+                                 {{ __('Activo Entrada') }}
+                               </a>
+                             </div>
+                       </div>
                     </div>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
@@ -87,14 +98,7 @@
                                             <td>{{ $dispositivo->updated_at }}</td>
 
                                             <td>
-                                                <form class="eliminar" action="{{ route('dispositivos.destroy',$dispositivo->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('dispositivos.edit',$dispositivo->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                                                    @csrf
-                                                    @if(@Auth::user()->hasRole('inventario'))
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                    @endif
-                                                </form>
+                                                <a class="btn btn-sm btn-success" href="{{ route('dispositivos.intercambio.edit',$dispositivo->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -104,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $dispositivoAsignados->links() !!}
+                {!! $dispositivos->links() !!}
             </div>
         </div>
     </div>

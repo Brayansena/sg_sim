@@ -205,7 +205,7 @@ class SimcardsAsignadaController extends Controller
             ->where('simcards.id','LIKE','%'.$texto.'%')
             ->orderBy('simcards.id','asc')
             ->paginate(100000000000000);
-        return view('asignacion.asignarbodega', compact('simcards','texto'));
+        return view('simcard.asignarbodega', compact('simcards','texto'));
 
     }
 
@@ -243,7 +243,7 @@ class SimcardsAsignadaController extends Controller
             ->paginate(100000000000000);
 
 
-        return view('asignacion.estadosim', compact('simcards','texto'));
+        return view('simcard.estadosim', compact('simcards','texto'));
     }
 
     public function estadobodega(Request $request)
@@ -285,7 +285,7 @@ class SimcardsAsignadaController extends Controller
             ->where('simcards_asignadas.estado','Activa')
             ->get();
 
-        return view('intercambio.index', compact('simcardsAsignadas','texto','contadors'))
+        return view('simcard.intercambioindex', compact('simcardsAsignadas','texto','contadors'))
             ->with('i', (request()->input('page', 1) - 1) * $simcardsAsignadas->perPage());
     }
     public function intercambioedit(Request $request,$id)
@@ -304,7 +304,7 @@ class SimcardsAsignadaController extends Controller
 
 
 
-        return view('intercambio.edit', compact('simcardsAsignada','simcards'));
+        return view('simcard.intercambioedit', compact('simcardsAsignada','simcards'));
 
     }
 
@@ -359,7 +359,7 @@ class SimcardsAsignadaController extends Controller
 
 
 
-        return redirect()->route('intercambio.index')
+        return redirect()->route('simcard.intercambioindex')
             ->with('success', 'SimcardsAsignada actualizada satisfactoriamente');
 
     }

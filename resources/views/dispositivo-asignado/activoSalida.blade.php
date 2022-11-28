@@ -17,17 +17,17 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Asignar a PDV</span>
+                        <span class="card-title">Activo de Salida</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('dispositivos.tecnicoasignado', $dispositivo->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('dispositivos.activosalidaasignado', $dispositivo->id) }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
                             <div class="box box-info padding-1">
 
                                 <div class="form-group">
                                     {{ Form::label('Cod_PDV') }}
-                                    {{ Form::text('id_puntoVenta', $dispositivo->id_puntoVenta, ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
+                                    {{ Form::text('id_puntoVenta', '', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
                                     {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <div class="form-group">
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('numero Acta') }}
-                                    {{ Form::text('numeroActa', $dispositivo->numeroActa, ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Acta de Salida']) }}
+                                    {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Acta de Salida']) }}
                                     {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <br>

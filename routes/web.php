@@ -80,18 +80,15 @@ Route::get('estado',[SimcardsAsignadaController::class,'estado'])->name('estado'
 
 Route::post('estado/estadobodega',[SimcardsAsignadaController::class,'estadobodega'])->name('estadobodega')->middleware('can:bodeAdmin');
 
-
 Route::get('intercambio',[SimcardsAsignadaController::class,'intercambioindex'])->name('intercambio.index')->middleware('can:tecnico');
 
 Route::get('intercambio/{simcards_asignada}/edit',[SimcardsAsignadaController::class,'intercambioedit'])->name('intercambio.edit')->middleware('can:tecnico');
 
 Route::put('intercambio/{simcards_asignada}',[SimcardsAsignadaController::class,'intercambioupdate'])->name('intercambio.update')->middleware('can:tecnico');
 
-
 Route::get('asignar/bodega',[SimcardsAsignadaController::class,'asignarBodega'])->name('asignar.bodega')->middleware('can:admin');
 
 Route::post('asignar/bodega/asignado',[SimcardsAsignadaController::class,'asignadoBodega'])->name('asignar.bodega.asignado')->middleware('can:admin');
-
 
 Route::resource('simcards-asignadas',App\Http\Controllers\SimcardsAsignadaController::class)->middleware('can:tecniadmin');
 
@@ -100,8 +97,6 @@ Route::get('simcards-asignada/exportar',[SimcardsAsignadaController::class,'expo
 
 
 Route::resource('bodegas',App\Http\Controllers\BodegaController::class)->middleware('can:bodega');
-
-
 
 Route::resource('tecnicos',App\Http\Controllers\TecnicoController::class)->middleware('can:tecnico');
 
@@ -120,26 +115,34 @@ Route::patch('user/{user}',[UserController::class,'passwordUpdate'])->name('user
 
 Route::resource('dispositivos',App\Http\Controllers\DispositivoController::class);
 
-Route::patch('dispositivo/{dispositivo}',[DispositivoController::class,'updateuser'])->name('dispositivos.updateuser')->middleware('can:invenBode');
-
-Route::get('dispositivo/{dispositivo}/edituser',[DispositivoController::class,'edituser'])->name('dispositivos.edituser')->middleware('can:invenBode');
-
 Route::get('dispositivo/consulta',[DispositivoController::class,'consulta'])->name('dispositivos.consulta')->middleware('can:tecniBodeAdminInve');
 
 Route::get('dispositivo/exportar',[DispositivoController::class,'exportar'])->name('dispositivos.exportar')->middleware('can:invenBode');
 
 Route::post('dispositivo/importar',[DispositivoController::class,'importar'])->name('dispositivos.importar')->middleware('can:invenBode');
 
-Route::get('dispositivo/asignar',[DispositivoAsignadoController::class,'asignarDispositivo'])->name('dispositivos.asignar')->middleware('can:invenBode');
+
+Route::patch('dispositivo/{dispositivo}',[DispositivoAsignadoController::class,'updateuser'])->name('dispositivos.updateuser')->middleware('can:invenBode');
+
+Route::get('dispositivo/{dispositivo}/edituser',[DispositivoAsignadoController::class,'edituser'])->name('dispositivos.edituser')->middleware('can:invenBode');
 
 Route::get('dispositivo/estado',[DispositivoAsignadoController::class,'estado'])->name('dispositivos.estado')->middleware('can:invenBode');
 
 Route::post('dispositivo/asignado',[DispositivoAsignadoController::class,'asignadoDispositivo'])->name('dispositivos.asignado')->middleware('can:invenBode');
 
-Route::get('dispositivo/tecnico',[DispositivoAsignadoController::class,'tecnico'])->name('dispositivos.tecnico')->middleware('can:tecnico');
+Route::get('dispositivo/acta/entrada',[DispositivoAsignadoController::class,'activoEntrada'])->name('dispositivos.entrada')->middleware('can:tecnico');
 
-Route::post('dispositivo/tecnicoasignado',[DispositivoAsignadoController::class,'tecnicoasignado'])->name('dispositivos.tecnicoasignado');
+Route::get('dispositivo/acta/salida',[DispositivoAsignadoController::class,'activoSalida'])->name('dispositivos.salida')->middleware('can:tecnico');
 
+Route::post('dispositivo/acta/entrada/asignado',[DispositivoAsignadoController::class,'activoEntradaAsignado'])->name('dispositivos.activoentradaasignado')->middleware('can:tecnico');
+
+Route::post('dispositivo/acta/salida/asignado',[DispositivoAsignadoController::class,'activoSalidaAsignado'])->name('dispositivos.activosalidaasignado')->middleware('can:tecnico');
+
+Route::get('dispositivo/intercambioindex',[DispositivoAsignadoController::class,'intercambioindex'])->name('dispositivos.intercambioindex')->middleware('can:tecnico');
+
+Route::get('dispositivo/intercambio/{dispositivo}/edit',[DispositivoAsignadoController::class,'intercambioedit'])->name('dispositivos.intercambio.edit')->middleware('can:tecnico');
+
+Route::put('dispositivo/intercambio/{dispositivo}',[DispositivoAsignadoController::class,'intercambioupdate'])->name('dispositivos.intercambio.update')->middleware('can:tecnico');
 
 
 Route::resource('dispositivo-asignados',App\Http\Controllers\DispositivoAsignadoController::class);

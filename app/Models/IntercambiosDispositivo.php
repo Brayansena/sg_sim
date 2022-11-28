@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class IntercambiosSim extends Model
+class IntercambiosDispositivo extends Model
 {
 
     static $rules = [
-        'id_newSimcard' => 'required',
-        'id_oldSimcard' => 'required',
+        'id_newActivo' => 'required',
+        'id_oldActivo' => 'required',
     ];
 
     protected $perPage = 1000000000000000;
@@ -20,7 +20,7 @@ class IntercambiosSim extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_oldSimcard','id_puntoVenta','id_userCreador','id_newSimcard'];
+    protected $fillable = ['id_oldDispositivo','id_puntoVenta','id_userCreador','id_newDispositivo'];
 
 
     /**
