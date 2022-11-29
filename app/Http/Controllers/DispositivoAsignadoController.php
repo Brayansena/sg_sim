@@ -240,12 +240,7 @@ class DispositivoAsignadoController extends Controller
     public function updateuser(Request $request, $id)
     {
         request()->validate(DispositivoAsignado::$rules2);
-        $request->validate([
-            'numeroActa' => 'unique:dispositivo_asignados,numeroActa',
-        ],
-        [
-            'numeroActa.unique' => 'Numero de acta ya esta en uso'
-        ]);
+
         $dispositivoAsignado = new DispositivoAsignado;;
         $idu = Auth::id();
         $dispositivoAsignado->id_puntoVenta=$idu;

@@ -371,7 +371,7 @@ class UserSeeder extends Seeder
             'dispositivo' => 'Mouse',
         ]);
         TipoDispositivo::create([
-            'dispositivo' => 'Monitor sin VGA',
+            'dispositivo' => 'Monitor HDMI',
         ]);
         TipoDispositivo::create([
             'dispositivo' => 'Monitor VGA',
