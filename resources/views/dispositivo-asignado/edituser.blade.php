@@ -21,7 +21,16 @@
                             @csrf
 
                             <div class="box box-info padding-1">
-
+                                <div class="form-group">
+                                    {{ Form::label('Activo') }}
+                                    {{ Form::label('id', $dispositivo->id, ['class' => 'form-control' . ($errors->has('id') ? ' is-invalid' : ''), 'placeholder' => 'Activo']) }}
+                                    {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('tipo_Dispositivo') }}
+                                    {{ Form::label('tipoDispositivo', $dispositivo->tipoDispositivo, ['class' => 'form-control' . ($errors->has('tipoDispositivo') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Dispositivo']) }}
+                                    {!! $errors->first('tipoDispositivo', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
                                     <div class="form-group">
                                         {{ Form::label('User Asignado') }}
                                         {{ Form::select('id_userAsignado', $users,$dispositivo->id_userAsignado, ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}

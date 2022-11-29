@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex;align-items: center;flex-direction: row-reverse;justify-content: space-between;padding: 10px 5px 5px;">
-                            <form style="display: flex;align-items: center;flex-direction: row-reverse;" action="{{route('intercambio.index') }}"  method="get" id="search">
+                            <form style="display: flex;align-items: center;flex-direction: row-reverse;" action="{{route('dispositivos.intercambioindex') }}"  method="get" id="search">
                               <div class="">
                                   <input type="submit" class="btn btn-dark btn-sm2" value="Buscar">
                                 </div>

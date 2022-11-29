@@ -20,7 +20,7 @@
                               </div>
                             </form>
                             <span style="font-size: 20px;">
-                                {{ __('Simcards Asignadas') }}
+                                {{ __('Intercambio Simcard') }}
                             </span>
                         </div>
                     </div>

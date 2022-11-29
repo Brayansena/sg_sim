@@ -118,6 +118,10 @@ class DispositivoAsignadoController extends Controller
 
     public function estado(Request $request)
     {
+        $users = DB::table('users')
+            ->select('name')
+            ->orderBy('id','asc')
+            ->paginate(100000000000);
         $texto=trim($request->get('texto'));
         $dispositivos = DB::table('dispositivos')
             ->join('users','dispositivos.id_userAsignado','=','users.id')
@@ -127,7 +131,7 @@ class DispositivoAsignadoController extends Controller
             ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','asc')
             ->paginate(100000000000);
-        return view('dispositivo-asignado.estado', compact('dispositivos','texto'));
+        return view('dispositivo-asignado.estado', compact('users','dispositivos','texto'));
 
     }
     public function activoEntrada(Request $request)
@@ -235,8 +239,16 @@ class DispositivoAsignadoController extends Controller
     }
     public function updateuser(Request $request, $id)
     {
+        request()->validate(DispositivoAsignado::$rules2);
+        $request->validate([
+            'numeroActa' => 'unique:dispositivo_asignados,numeroActa',
+        ],
+        [
+            'numeroActa.unique' => 'Numero de acta ya esta en uso'
+        ]);
         $dispositivoAsignado = new DispositivoAsignado;;
         $idu = Auth::id();
+        $dispositivoAsignado->id_puntoVenta=$idu;
         $dispositivoAsignado->id_userCreador=$idu;
         $dispositivoAsignado->id_userAsignado=$request->input('id_userAsignado');
         $dispositivoAsignado->id_dispositivo=$id;
@@ -247,13 +259,13 @@ class DispositivoAsignadoController extends Controller
 
 
         $dispositivo=Dispositivo::findOrFail($id);
-
+        $dispositivo->id_puntoVenta=1;
         $dispositivo->id_userAsignado=$request->input('id_userAsignado');
         $dispositivo->numeroActa=$request->input('numeroActa');
         $dispositivo->estado=$request->input('estado');
         $dispositivo->save();
 
-        return redirect()->route('dispositivo-asignado.estado')
+        return redirect()->route('dispositivos.estado')
             ->with('success', 'Dispositivo actualizado satisfactoriamente');
         }
 

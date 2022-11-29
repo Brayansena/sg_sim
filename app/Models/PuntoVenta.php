@@ -42,7 +42,6 @@ class PuntoVenta extends Model
 		'zona' => 'required',
         'conexion' => 'required',
 		'canal' => 'required',
-        'estado' => 'required',
 		'jefeComercial' => 'required',
 		'ccCordinador' => 'required',
 		'cordinador' => 'required',

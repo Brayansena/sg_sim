@@ -53,14 +53,13 @@ Route::get('rede/exportar',[RedeController::class,'exportar'])->name('redes.expo
 
 Route::post('rede/importar',[RedeController::class,'importar'])->name('redes.importar')->middleware('can:admin');
 
-
-Route::resource('punto-ventas',App\Http\Controllers\PuntoVentaController::class)->middleware('can:admin');
+Route::resource('punto-ventas',App\Http\Controllers\PuntoVentaController::class)->middleware('can:adminInven');
 
 Route::get('punto-venta/consulta',[PuntoVentaController::class,'consulta'])->name('punto-ventas.consulta')->middleware('can:tecniBodeAdminInve');
 
-Route::get('punto-venta/exportar',[PuntoVentaController::class,'exportar'])->name('punto-ventas.exportar')->middleware('can:admin');
+Route::get('punto-venta/exportar',[PuntoVentaController::class,'exportar'])->name('punto-ventas.exportar')->middleware('can:adminInven');
 
-Route::post('punto-venta/importar',[PuntoVentaController::class,'importar'])->name('punto-ventas.importar')->middleware('can:admin');
+Route::post('punto-venta/importar',[PuntoVentaController::class,'importar'])->name('punto-ventas.importar')->middleware('can:adminInven');
 
 
 
@@ -145,4 +144,4 @@ Route::get('dispositivo/intercambio/{dispositivo}/edit',[DispositivoAsignadoCont
 Route::put('dispositivo/intercambio/{dispositivo}',[DispositivoAsignadoController::class,'intercambioupdate'])->name('dispositivos.intercambio.update')->middleware('can:tecnico');
 
 
-Route::resource('dispositivo-asignados',App\Http\Controllers\DispositivoAsignadoController::class);
+Route::resource('dispositivo-asignados',App\Http\Controllers\DispositivoAsignadoController::class)->middleware('can:tecniBodeAdminInve');

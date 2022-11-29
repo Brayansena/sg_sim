@@ -35,6 +35,7 @@ class SimcardController extends Controller
             ->where('simcards.id','LIKE','%'.$texto.'%')
             ->orWhere('users.name','LIKE','%'.$texto.'%')
             ->orWhere('simcards.linea','LIKE','%'.$texto.'%')
+            ->orWhere('simcards.planAsignado','LIKE','%'.$texto.'%')
             ->orWhere('simcards.operador','LIKE','%'.$texto.'%')
             ->orderBy('id','desc')
             ->paginate(100000000000);
@@ -156,6 +157,7 @@ class SimcardController extends Controller
             ->orWhere('users.name','LIKE','%'.$texto.'%')
             ->orWhere('simcards.linea','LIKE','%'.$texto.'%')
             ->orWhere('simcards.operador','LIKE','%'.$texto.'%')
+            ->orWhere('simcards.planAsignado','LIKE','%'.$texto.'%')
             ->orderBy('id','desc')
             ->paginate(100000000000);
 

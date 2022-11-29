@@ -38,6 +38,11 @@ class SimcardsAsignadaController extends Controller
             ->where('simcards.id','LIKE','%'.$texto.'%')
             ->orWhere('simcards_asignadas_registradas.id_puntoVenta','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
+            ->orWhere('simcards.linea','LIKE','%'.$texto.'%')
+            ->orWhere('simcards_asignadas_registradas.estado','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.conexion','LIKE','%'.$texto.'%')
+            ->orWhere('simcards_asignadas_registradas.fechaRegistro','LIKE','%'.$texto.'%')
             ->orderBy('simcards_asignadas_registradas.estado','asc')
             ->paginate(100000000000000);
 
@@ -116,6 +121,7 @@ class SimcardsAsignadaController extends Controller
 
         $simcard=Simcard::findOrFail($id_simcard);
         $idu = Auth::id();
+        $simcard->id_userAsignado=3;
         $simcard->id_userCreador=$idu;
         $simcard->estado='Activa';
         $simcard->save();
@@ -276,7 +282,8 @@ class SimcardsAsignadaController extends Controller
             ->join('simcards','simcards_asignadas.id_simcard','=','simcards.id')
             ->join('punto_ventas','simcards_asignadas.id_puntoVenta','=','punto_ventas.id')
             ->select('simcards_asignadas.id','simcards_asignadas.observaciones','simcards.linea','punto_ventas.nombrePdv','punto_ventas.conexion','users.name','simcards_asignadas.estado','simcards_asignadas.fechaRegistro','simcards_asignadas.id_simcard')
-            // ->where('simcards_asignadas.id_userCreador','=',$id)
+            ->where('simcards_asignadas.id_simcard','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.id','LIKE','%'.$texto.'%')
             ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
             ->orderBy('simcards_asignadas.estado','asc')
             ->paginate(100000000000000);

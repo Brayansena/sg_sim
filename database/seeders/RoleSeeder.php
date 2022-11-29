@@ -29,6 +29,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'tecniBodeAdminInve'])->assignRole($role1,$role2,$role3,$role4);
         Permission::create(['name' => 'invenBode'])->assignRole($role2,$role3);
         Permission::create(['name' => 'bodeAdmin'])->assignRole($role3,$role1);
+        Permission::create(['name' => 'adminInven'])->assignRole($role1,$role2);
 
 
     }

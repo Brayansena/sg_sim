@@ -28,6 +28,10 @@ class DispositivoAsignado extends Model
         'numeroActa' => 'required|unique:dispositivos,numeroActa',
         'id' => 'required',
     ];
+    static $rules2 = [
+        'id_userAsignado' => 'required',
+        'estado' => 'required',
+    ];
 
     protected $perPage = 20;
 
