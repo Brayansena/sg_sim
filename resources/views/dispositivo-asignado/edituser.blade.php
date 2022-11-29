@@ -41,11 +41,6 @@
                                         {{ Form::select('estado',$estado,$dispositivo->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
                                         {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
-                                    <div class="form-group">
-                                        {{ Form::label('numero Acta') }}
-                                        {{ Form::text('numeroActa', $dispositivo->numeroActa, ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta']) }}
-                                        {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
-                                    </div>
                                 </div>
                                 <br>
                                 <div class="box-footer mt20">

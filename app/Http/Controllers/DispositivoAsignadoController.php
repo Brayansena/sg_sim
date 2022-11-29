@@ -241,6 +241,13 @@ class DispositivoAsignadoController extends Controller
     {
         request()->validate(DispositivoAsignado::$rules2);
 
+
+        $dispositivo=Dispositivo::findOrFail($id);
+        $dispositivo->id_puntoVenta=1;
+        $dispositivo->id_userAsignado=$request->input('id_userAsignado');
+        $dispositivo->estado=$request->input('estado');
+        $dispositivo->save();
+
         $dispositivoAsignado = new DispositivoAsignado;;
         $idu = Auth::id();
         $dispositivoAsignado->id_puntoVenta=$idu;
@@ -249,16 +256,8 @@ class DispositivoAsignadoController extends Controller
         $dispositivoAsignado->id_dispositivo=$id;
         $dispositivoAsignado->id_puntoVenta=1;
         $dispositivoAsignado->registro=$request->input('estado');
-        $dispositivoAsignado->numeroActa=$request->input('numeroActa');
+        $dispositivoAsignado->numeroActa=$dispositivo->numeroActa;
         $dispositivoAsignado->save();
-
-
-        $dispositivo=Dispositivo::findOrFail($id);
-        $dispositivo->id_puntoVenta=1;
-        $dispositivo->id_userAsignado=$request->input('id_userAsignado');
-        $dispositivo->numeroActa=$request->input('numeroActa');
-        $dispositivo->estado=$request->input('estado');
-        $dispositivo->save();
 
         return redirect()->route('dispositivos.estado')
             ->with('success', 'Dispositivo actualizado satisfactoriamente');
