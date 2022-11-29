@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Exports\SimcardsAsignadaExport;
 use App\Models\SimcardsAsignadasRegistrada;
 use App\Models\SimcardsAsignada;
+use App\Models\IntercambiosSim;
 use App\Models\PuntoVenta;
 use App\Models\Simcard;
 use Illuminate\Http\Request;
@@ -312,24 +313,23 @@ class SimcardsAsignadaController extends Controller
     {
         request()->validate(IntercambiosSim::$rules);
 
-        $simcardsAsignada = SimcardsAsignada::find($id);
-        $simcard = Simcard::find($id);
         $idu = Auth::id();
+        $simcardsAsignada = SimcardsAsignada::find($id);
         $intercambio = new IntercambiosSim();
         $intercambio->id_oldSimcard=$simcardsAsignada->id_simcard;
-
-
-
-
-
         $intercambio->id_puntoVenta=$simcardsAsignada->id_puntoVenta;
         $intercambio->id_userCreador=$idu;
         $intercambio->id_newSimcard=$request->input('id_newSimcard');
         $intercambio->save();
+        $SimcardsAsignadanew = new SimcardsAsignada;
+        $SimcardsAsignadanew->id_userCreador=$idu;
+        $SimcardsAsignadanew->fechaRegistro=now();
+        $SimcardsAsignadanew->id_puntoVenta=$simcardsAsignada->id_puntoVenta;
+        $SimcardsAsignadanew->id_simcard=$intercambio->id_newSimcard;
+        $SimcardsAsignadanew->estado='Activa';
+        $SimcardsAsignadanew->save();
+        $simcard = Simcard::find($id);
         $idu = Auth::id();
-
-
-
         $SimcardsAsignadasRegistrada = new SimcardsAsignadasRegistrada;
         $SimcardsAsignadasRegistrada->id_userCreador=$idu;
         $SimcardsAsignadasRegistrada->fechaRegistro=now();
@@ -339,25 +339,10 @@ class SimcardsAsignadaController extends Controller
         $SimcardsAsignadasRegistrada->estado='Activa';
         $SimcardsAsignadasRegistrada->save();
 
-
         Simcard::where('id',$intercambio->id_oldSimcard)->update(['estado'=>'Inactiva','id_userAsignado'=>$idu]);
         Simcard::where('id',$intercambio->id_newSimcard)->update(['estado'=>'Activa','id_userAsignado'=>$idu]);
-
-
         SimcardsAsignada::where('id_simcard',$intercambio->id_oldSimcard)->delete();
         SimcardsAsignadasRegistrada::where('estado','Activa')->where('id_simcard',$intercambio->id_oldSimcard)->update(['estado'=>'Inactiva']);
-
-        $SimcardsAsignadanew = new SimcardsAsignada;
-        $SimcardsAsignadanew->id_userCreador=$idu;
-        $SimcardsAsignadanew->fechaRegistro=now();
-        $SimcardsAsignadanew->id_puntoVenta=$simcardsAsignada->id_puntoVenta;
-        $SimcardsAsignadanew->id_simcard=$intercambio->id_newSimcard;
-        $SimcardsAsignadanew->estado='Activa';
-
-        $SimcardsAsignadanew->save();
-
-
-
 
         return redirect()->route('simcard.intercambioindex')
             ->with('success', 'SimcardsAsignada actualizada satisfactoriamente');

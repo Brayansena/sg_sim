@@ -91,15 +91,9 @@ class UserController extends Controller
         $confirmpassword=$request->confirmpassword;
         $passwordCount=count(explode(" ", $password));
         if ($password==$confirmpassword) {
-            if ($passwordCount>7) {
-                User::where('id',$id)->update(['password'=>Hash::make($request->password)]);
-                return redirect()->route('users.index')
-                ->with('success', 'Se cambio la contraseña satisfactoriamente');
-            } else {
-                return redirect()->back()->with('success', 'Como minimo 8 caracteres');
-            }
-
-
+            User::where('id',$id)->update(['password'=>Hash::make($request->password)]);
+            return redirect()->route('users.index')
+            ->with('success', 'Se cambio la contraseña satisfactoriamente');
     } else {
 
         return redirect()->back()->with('success', 'La contraseña no coincide');

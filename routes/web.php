@@ -80,11 +80,11 @@ Route::get('estado',[SimcardsAsignadaController::class,'estado'])->name('estado'
 
 Route::post('estado/estadobodega',[SimcardsAsignadaController::class,'estadobodega'])->name('estadobodega')->middleware('can:bodeAdmin');
 
-Route::get('intercambio',[SimcardsAsignadaController::class,'intercambioindex'])->name('intercambio.index')->middleware('can:tecnico');
+Route::get('intercambio',[SimcardsAsignadaController::class,'intercambioindex'])->name('simcard.intercambioindex')->middleware('can:tecnico');
 
-Route::get('intercambio/{simcards_asignada}/edit',[SimcardsAsignadaController::class,'intercambioedit'])->name('intercambio.edit')->middleware('can:tecnico');
+Route::get('intercambio/{simcards_asignada}/edit',[SimcardsAsignadaController::class,'intercambioedit'])->name('simcard.intercambioedit')->middleware('can:tecnico');
 
-Route::put('intercambio/{simcards_asignada}',[SimcardsAsignadaController::class,'intercambioupdate'])->name('intercambio.update')->middleware('can:tecnico');
+Route::put('intercambio/{simcards_asignada}',[SimcardsAsignadaController::class,'intercambioupdate'])->name('simcard.intercambioupdate')->middleware('can:tecnico');
 
 Route::get('asignar/bodega',[SimcardsAsignadaController::class,'asignarBodega'])->name('asignar.bodega')->middleware('can:admin');
 

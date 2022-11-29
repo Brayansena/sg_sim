@@ -16,7 +16,7 @@
                         <span class="card-title">Intercambio Sims</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('intercambio.update', $simcardsAsignada->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('simcard.intercambioupdate', $simcardsAsignada->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PUT') }}
                             @csrf
                             <div class="box box-info padding-1">

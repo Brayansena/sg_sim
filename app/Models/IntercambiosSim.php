@@ -10,7 +10,6 @@ class IntercambiosSim extends Model
 
     static $rules = [
         'id_newSimcard' => 'required',
-        'id_oldSimcard' => 'required',
     ];
 
     protected $perPage = 1000000000000000;
