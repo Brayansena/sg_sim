@@ -27,7 +27,7 @@
 
                                 <div class="form-group">
                                     {{ Form::label('Cod_PDV') }}
-                                    {{ Form::text('id_puntoVenta', '', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
+                                    {{ Form::label('id_puntoVenta', '1', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
                                     {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                                 <div class="form-group">

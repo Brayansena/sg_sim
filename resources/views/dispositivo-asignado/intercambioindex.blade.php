@@ -98,7 +98,7 @@
                                             <td>{{ $dispositivo->updated_at }}</td>
 
                                             <td>
-                                                <a class="btn btn-sm btn-success" href="{{ route('dispositivos.intercambio.edit',$dispositivo->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <a class="btn btn-sm btn-success" href="{{ route('dispositivos.intercambio.edit',$dispositivo->id) }}"><i class="fa fa-fw fa-edit"></i> Intercambio</a>
                                             </td>
                                         </tr>
                                         @endforeach

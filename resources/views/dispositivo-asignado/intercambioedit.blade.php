@@ -23,14 +23,14 @@
                                 <div class="box-body">
 
                                     <div class="form-group">
-                                        {{ Form::label('Activo') }}
-                                        {{ Form::text('id_oldActivo','', ['class' => 'form-control' . ($errors->has('id_oldActivo') ? ' is-invalid' : ''), 'placeholder' => 'Activo']) }}
-                                        {!! $errors->first('id_oldActivo', '<div class="invalid-feedback">:message</div>') !!}
+                                        {{ Form::label('Numero Acta') }}
+                                        {{ Form::text('numeroActa','', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Numero Acta Salida']) }}
+                                        {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
 
                                     <div class="form-group">
                                         {{ Form::label('Nuevo Activo') }}
-                                        {{ Form::text('id_newActivo','', ['class' => 'form-control' . ($errors->has('id_newActivo') ? ' is-invalid' : ''), 'placeholder' => 'Activo Nuevo']) }}
+                                        {{ Form::select('id_newActivo',$disponibles,'', ['class' => 'form-control' . ($errors->has('id_newActivo') ? ' is-invalid' : ''), 'placeholder' => 'Activo Nuevo']) }}
                                         {!! $errors->first('id_newActivo', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
 

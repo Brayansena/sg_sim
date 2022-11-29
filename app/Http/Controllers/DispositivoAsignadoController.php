@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\IntercambiosDispositivo;
 use App\Models\DispositivoAsignado;
 use Illuminate\Http\Request;
 use App\Models\IntercambiosSim;
@@ -166,26 +166,27 @@ class DispositivoAsignadoController extends Controller
     }
     public function activoEntradaAsignado(Request $request)
     {
-        request()->validate(DispositivoAsignado::$rules);
         $request->validate([
-            'id_puntoVenta' => 'required|exists:punto_ventas,id',
+            'id' => 'required|exists:dispositivos,id',
+            'numeroActa' => 'required|unique:dispositivos,numeroActa',
         ],
         [
-            'id_puntoVenta.exists' => 'Codigo del punto de venta no existe'
+            'id.exists' => 'Activo no existe',
+            'numeroActa.unique' => 'Numero de acta en uso'
         ]);
         $dispositivoAsignado = new DispositivoAsignado;;
         $idu = Auth::id();
         $dispositivoAsignado->id_userCreador=$idu;
         $dispositivoAsignado->id_userAsignado=$idu;
         $dispositivoAsignado->id_dispositivo=$request->input('id');
-        $dispositivoAsignado->id_puntoVenta=$request->input('id_puntoVenta');
+        $dispositivoAsignado->id_puntoVenta=1;
         $dispositivoAsignado->registro='Devuelto';
         $dispositivoAsignado->numeroActa=$request->input('numeroActa');
         $dispositivoAsignado->save();
         $idd=$request->input('id');
         $dispositivo=Dispositivo::findOrFail($idd);
         $dispositivo->id_userAsignado=3;
-        $dispositivo->id_puntoVenta=$request->input('id_puntoVenta');
+        $dispositivo->id_puntoVenta=1;
         $dispositivo->estado='Disponible';
         $dispositivo->numeroActa=$request->input('numeroActa');
         $dispositivo->id_userCreador=$idu;
@@ -273,70 +274,71 @@ class DispositivoAsignadoController extends Controller
             ->join('users','dispositivos.id_userAsignado','=','users.id')
             ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
             ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
-            ->where('dispositivos.id','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
-            ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.tipoDispositivo','LIKE','%'.$texto.'%')
-            ->orWhere('users.name','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.numeroActa','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.modelo','LIKE','%'.$texto.'%')
+            ->where('dispositivos.estado','Asignado')
+            ->orWhere('dispositivos.estado','Asignado')
+            ->orWhere('dispositivos.id_userAsignado','Asignado')
+            ->where('punto_ventas.id','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
-            $dispositivoc = DB::table('dispositivos')
-            ->join('users','dispositivos.id_userAsignado','=','users.id')
-            ->join('punto_ventas','dispositivos.id_puntoVenta','=','punto_ventas.id')
-            ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
-            ->where('dispositivos.id','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.id_puntoVenta','LIKE','%'.$texto.'%')
-            ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.tipoDispositivo','LIKE','%'.$texto.'%')
-            ->orWhere('users.name','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.numeroActa','LIKE','%'.$texto.'%')
-            ->orWhere('dispositivos.modelo','LIKE','%'.$texto.'%')
-            ->get();
-        return view('dispositivo-asignado.intercambioindex', compact('users','dispositivoc','dispositivos','texto'))
+        return view('dispositivo-asignado.intercambioindex', compact('users','dispositivos','texto'))
             ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
     public function intercambioedit(Request $request,$id)
     {
+        $idu = Auth::id();
         $dispositivo = Dispositivo::find($id);
-        return view('dispositivo-asignado.intercambioedit', compact('dispositivo'));
+        $selesion = DB::table('dispositivos')
+        ->select('id','id_userAsignado')
+        ->where('id_puntoVenta',1)
+        ->where('estado','Disponible')
+        ->where('id_userAsignado',$idu)
+        ->orderBy('id','asc')
+        ->paginate(100000000000000);
+        $disponibles = $selesion->pluck('id','id');
+        return view('dispositivo-asignado.intercambioedit', compact('disponibles','dispositivo'));
     }
 
     public function intercambioupdate(Request $request,$id)
     {
+        $idu = Auth::id();
         // request()->validate(IntercambiosSim::$rules);
-
+        $request->validate([
+            'numeroActa' => 'required|unique:dispositivo_asignados,numeroActa',
+            'id_newActivo' => 'required|exists:dispositivos,id',
+        ],
+        [
+            'numeroActa.unique' => 'Numero de acta en uso',
+            'id_newActivo.exists' => 'Activo no existe'
+        ]);
         $dispositivo = Dispositivo::find($id);
         $intercambio = new IntercambiosDispositivo();
-        $intercambio->id_oldDispositivo=$request->input('id_oldDispositivo');
+        $intercambio->id_oldDispositivo=$id;
         $intercambio->id_puntoVenta=$dispositivo->id_puntoVenta;
         $intercambio->id_userCreador=$idu;
-        $intercambio->id_newDispositivo=$request->input('id_newDispositivo');
+        $intercambio->id_newDispositivo=$request->input('id_newActivo');
         $intercambio->save();
-        $idu = Auth::id();
         $dispositivosAsignados = new DispositivoAsignado;
         $dispositivosAsignados->id_userCreador=$idu;
         $dispositivosAsignados->id_puntoVenta=$dispositivo->id_puntoVenta;
-        $dispositivosAsignados->id_dispositivo=$request->input('id_newDispositivo');
+        $dispositivosAsignados->id_dispositivo=$request->input('id_newActivo');
         $dispositivosAsignados->numeroActa=$request->input('numeroActa');
         $dispositivosAsignados->id_userAsignado=$dispositivo->id_userAsignado;
-        $dispositivosAsignados->restistro='Asignado';
+        $dispositivosAsignados->registro='Asignado';
         $dispositivosAsignados->save();
 
         $dispositivosAsignados = new DispositivoAsignado;
         $dispositivosAsignados->id_userCreador=$idu;
         $dispositivosAsignados->id_puntoVenta=$dispositivo->id_puntoVenta;
-        $dispositivosAsignados->id_dispositivo=$request->input('id_oldDispositivo');
-        $dispositivosAsignados->numeroActa=$request->input('numeroActa');
+        $dispositivosAsignados->id_dispositivo=$id;
+        $dispositivosAsignados->numeroActa=$dispositivo->numeroActa;
         $dispositivosAsignados->id_userAsignado=$dispositivo->id_userAsignado;
-        $dispositivosAsignados->restistro='Disponible';
+        $dispositivosAsignados->registro='Disponible';
         $dispositivosAsignados->save();
 
-        Dispositivo::where('id',$intercambio->id_oldDispositivo)->update(['estado'=>'Disponible','id_userAsignado'=>$idu]);
-        Dispositivo::where('id',$intercambio->id_newDispositivo)->update(['estado'=>'Asignado','id_userAsignado'=>$idu]);
+        Dispositivo::where('id',$intercambio->id_oldDispositivo)->update(['estado'=>'Disponible','id_userAsignado'=>$idu,'id_puntoVenta'=>1]);
+        Dispositivo::where('id',$intercambio->id_newDispositivo)->update(['estado'=>'Asignado','id_userAsignado'=>$idu,'id_puntoVenta'=>$dispositivo->id_puntoVenta]);
 
-        return redirect()->route('dispositivo-asignado.intercambioindex')
+        return redirect()->route('dispositivos.intercambioindex')
             ->with('success', 'Dispositivo actualizada satisfactoriamente');
 
     }
