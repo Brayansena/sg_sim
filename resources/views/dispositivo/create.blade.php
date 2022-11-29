@@ -202,6 +202,66 @@ if (isset($_GET["tipo"])) {
         </div>
     </div>
 </div>
+@elseif($tipo == 'disco duro')
+<div>
+    <div class="col-md-12">
+        @includeif('partials.errors')
+        <div class="card card-default">
+            <div class="card-body">
+                    <h2></h2>
+                    <form method="POST" action="{{ route('dispositivos.store') }}"  role="form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="box-body">
+                                <div class="form-group">
+                                    {{ Form::label('tipo_Dispositivo') }}
+                                    {{ Form::text('tipoDispositivo', $tipo, ['class' => 'form-control' . ($errors->has('tipoDispositivo') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Dispositivo']) }}
+                                    {!! $errors->first('tipoDispositivo', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('modelo') }}
+                                    {{ Form::text('modelo', '', ['class' => 'form-control' . ($errors->has('modelo') ? ' is-invalid' : ''), 'placeholder' => 'Modelo']) }}
+                                    {!! $errors->first('modelo', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('estado') }}
+                                    {{ Form::select('estado',$estado,'', ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+                                    {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('Cod_PDV') }}
+                                    {{ Form::text('id_puntoVenta', '1', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
+                                    {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('User Asignado') }}
+                                    {{ Form::select('id_userAsignado', $users,3, ['class' => 'form-control' . ($errors->has('id_userAsignado') ? ' is-invalid' : ''), 'placeholder' => 'User Asignado']) }}
+                                    {!! $errors->first('id_userAsignado', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('numero Acta') }}
+                                    {{ Form::text('numeroActa', '', ['class' => 'form-control' . ($errors->has('numeroActa') ? ' is-invalid' : ''), 'placeholder' => 'Acta de Entrada']) }}
+                                    {!! $errors->first('numeroActa', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('cantidad') }}
+                                    {{ Form::text('cantidad', '', ['class' => 'form-control' . ($errors->has('cantidad') ? ' is-invalid' : ''), 'placeholder' => 'Cantidad']) }}
+                                    {!! $errors->first('cantidad', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('Activo') }}
+                                    {{ Form::text('id', '', ['class' => 'form-control' . ($errors->has('id') ? ' is-invalid' : ''), 'placeholder' => 'Activo']) }}
+                                    {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
+                                </div>
+                                <br>
+                                <div class="box-footer mt20">
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
 @elseif($tipo == 'otro')
 <div>
     <div class="col-md-12">
