@@ -100,6 +100,8 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/dispositivos">Dispositivo</a></li>
                         <li class="nav-item"><a class="nav-link" href="/dispositivo/estado">Asignacion y Estado</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivo/registro">Registros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivo/registrointer">Registros de intercambios</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                         <li class="nav-item"><a class="nav-link" href="/punto-ventas">Puntos de Venta</a></li>
                     </ul>

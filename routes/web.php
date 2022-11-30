@@ -143,5 +143,8 @@ Route::get('dispositivo/intercambio/{dispositivo}/edit',[DispositivoAsignadoCont
 
 Route::put('dispositivo/intercambio/{dispositivo}',[DispositivoAsignadoController::class,'intercambioupdate'])->name('dispositivos.intercambio.update')->middleware('can:tecnico');
 
-
 Route::resource('dispositivo-asignados',App\Http\Controllers\DispositivoAsignadoController::class)->middleware('can:tecniBodeAdminInve');
+
+Route::get('dispositivo/registro',[DispositivoAsignadoController::class,'registro'])->name('dispositivos.registro')->middleware('can:invenBode');
+
+Route::get('dispositivo/registrointer',[DispositivoAsignadoController::class,'registrointer'])->name('dispositivos.registrointer')->middleware('can:invenBode');

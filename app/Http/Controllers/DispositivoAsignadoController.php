@@ -322,7 +322,7 @@ class DispositivoAsignadoController extends Controller
         $dispositivosAsignados->id_puntoVenta=$dispositivo->id_puntoVenta;
         $dispositivosAsignados->id_dispositivo=$request->input('id_newActivo');
         $dispositivosAsignados->numeroActa=$request->input('numeroActa');
-        $dispositivosAsignados->id_userAsignado=$dispositivo->id_userAsignado;
+        $dispositivosAsignados->id_userAsignado=$idu;
         $dispositivosAsignados->registro='Asignado Intercambio';
         $dispositivosAsignados->save();
 
@@ -331,16 +331,56 @@ class DispositivoAsignadoController extends Controller
         $dispositivosAsignados->id_puntoVenta=$dispositivo->id_puntoVenta;
         $dispositivosAsignados->id_dispositivo=$id;
         $dispositivosAsignados->numeroActa=$dispositivo->numeroActa;
-        $dispositivosAsignados->id_userAsignado=$dispositivo->id_userAsignado;
+        $dispositivosAsignados->id_userAsignado=$idu;
         $dispositivosAsignados->registro='Disponible Intercambio';
         $dispositivosAsignados->save();
 
         Dispositivo::where('id',$intercambio->id_oldDispositivo)->update(['estado'=>'Disponible','id_userAsignado'=>$idu,'id_puntoVenta'=>1]);
-        Dispositivo::where('id',$intercambio->id_newDispositivo)->update(['id_userCreador'=>$idu,'estado'=>'Asignado','id_userAsignado'=>3,'id_puntoVenta'=>$dispositivo->id_puntoVenta]);
+        Dispositivo::where('id',$intercambio->id_newDispositivo)->update(['id_userCreador'=>$idu,'estado'=>'Asignado','id_userAsignado'=>3,'id_puntoVenta'=>$dispositivo->id_puntoVenta,'numeroActa'=>$request->input('numeroActa')]);
 
         return redirect()->route('dispositivos.intercambioindex')
             ->with('success', 'Dispositivo actualizada satisfactoriamente');
 
+    }
+    public function registro(Request $request)
+    {
+        $users = DB::table('users')
+            ->select('name')
+            ->orderBy('id','asc')
+            ->paginate(100000000000);
+        $texto=trim($request->get('texto'));
+        $dispositivos = DB::table('dispositivo_asignados')
+            ->join('dispositivos','dispositivo_asignados.id_dispositivo','=','dispositivos.id')
+            ->join('users','dispositivo_asignados.id_userAsignado','=','users.id')
+            ->join('punto_ventas','dispositivo_asignados.id_puntoVenta','=','punto_ventas.id')
+            ->select('dispositivo_asignados.registro','dispositivo_asignados.id_dispositivo','dispositivo_asignados.id','dispositivo_asignados.id_puntoVenta','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.modelo','dispositivos.serial','dispositivos.observacion','users.name','dispositivo_asignados.numeroActa','dispositivo_asignados.updated_at','dispositivo_asignados.created_at','dispositivo_asignados.id_userCreador')
+            ->where('dispositivo_asignados.id_dispositivo','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivo_asignados.id_puntoVenta','LIKE','%'.$texto.'%')
+            ->orWhere('punto_ventas.nombrePdv','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivos.tipoDispositivo','LIKE','%'.$texto.'%')
+            ->orWhere('users.name','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivo_asignados.created_at','LIKE','%'.$texto.'%')
+            ->orWhere('dispositivo_asignados.numeroActa','LIKE','%'.$texto.'%')
+            ->orderBy('dispositivo_asignados.id','desc')
+            ->paginate(100000000000);
+
+        return view('dispositivo-asignado.registro', compact('texto','dispositivos','users'))
+            ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
+    }
+    public function registrointer(Request $request)
+    {
+        $texto=trim($request->get('texto'));
+        $dispositivos = DB::table('intercambios_dispositivos')
+            ->join('users','intercambios_dispositivos.id_userCreador','=','users.id')
+            ->join('punto_ventas','intercambios_dispositivos.id_puntoVenta','=','punto_ventas.id')
+            ->join('dispositivos','intercambios_dispositivos.id_newDispositivo','=','dispositivos.id')
+            ->select('dispositivos.tipoDispositivo','intercambios_dispositivos.updated_at','punto_ventas.nombrePdv','intercambios_dispositivos.id_oldDispositivo','intercambios_dispositivos.id_puntoVenta','users.name','intercambios_dispositivos.id_newDispositivo')
+            ->where('intercambios_dispositivos.id_oldDispositivo','LIKE','%'.$texto.'%')
+            ->orderBy('intercambios_dispositivos.id','desc')
+            ->paginate(100000000000);
+
+        return view('dispositivo-asignado.registrointer', compact('texto','dispositivos'))
+            ->with('i', (request()->input('page', 1) - 1) * $dispositivos->perPage());
     }
 
 }
