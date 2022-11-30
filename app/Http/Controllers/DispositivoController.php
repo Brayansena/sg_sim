@@ -143,7 +143,7 @@ class DispositivoController extends Controller
         $dispositivoAsignado->id_userAsignado=$request->input('id_userAsignado');
         $dispositivoAsignado->id_dispositivo=$request->input('id');
         $dispositivoAsignado->id_puntoVenta=$request->input('id_puntoVenta');
-        $dispositivoAsignado->registro=$request->input('estado');
+        $dispositivoAsignado->registro='creado';
         $dispositivoAsignado->numeroActa=$request->input('numeroActa');
         $dispositivoAsignado->save();
 

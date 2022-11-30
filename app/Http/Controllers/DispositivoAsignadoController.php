@@ -277,8 +277,7 @@ class DispositivoAsignadoController extends Controller
             ->select('dispositivos.id_puntoVenta','dispositivos.estado','punto_ventas.nombrePdv','dispositivos.tipoDispositivo','dispositivos.id','dispositivos.modelo','dispositivos.serial','dispositivos.mac','dispositivos.imei','dispositivos.observacion','users.name','dispositivos.numeroActa','dispositivos.updated_at','dispositivos.procesador','dispositivos.ram','dispositivos.discoDuro','dispositivos.cantidad','dispositivos.id_userCreador')
             ->where('dispositivos.estado','Asignado')
             ->orWhere('dispositivos.estado','Asignado')
-            ->orWhere('dispositivos.id_userAsignado','Asignado')
-            ->where('punto_ventas.id','LIKE','%'.$texto.'%')
+            ->where('dispositivos.id','LIKE','%'.$texto.'%')
             ->orderBy('dispositivos.id','desc')
             ->paginate(100000000000);
         return view('dispositivo-asignado.intercambioindex', compact('users','dispositivos','texto'))
