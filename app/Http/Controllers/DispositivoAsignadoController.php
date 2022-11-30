@@ -169,6 +169,7 @@ class DispositivoAsignadoController extends Controller
         $request->validate([
             'id' => 'required|exists:dispositivos,id',
             'numeroActa' => 'required|unique:dispositivos,numeroActa',
+            'id_puntoVenta' => 'exists:punto_ventas,id'
         ],
         [
             'id.exists' => 'Activo no existe',
