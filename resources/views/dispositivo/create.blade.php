@@ -24,7 +24,7 @@ if (isset($_GET["tipo"])) {
         @endforeach
      </select>
 </form>
-@elseif($tipo != 'sensor'&&$tipo != 'otro')
+@elseif($tipo != 'Sensor'&&$tipo != 'Otro')
 <div>
     <div class="col-md-12">
         @includeif('partials.errors')
@@ -80,7 +80,7 @@ if (isset($_GET["tipo"])) {
                                     {{ Form::text('id_puntoVenta', '1', ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod PDV']) }}
                                     {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
-                                @if ($tipo == 'torre'||$tipo == 'todo en uno'||$tipo == 'mini torre'||$tipo == 'portatil')
+                                @if ($tipo == 'Torre'||$tipo == 'Todo en uno'||$tipo == 'Mini torre'||$tipo == 'Portatil')
 
                                 <div class="form-group">
                                     {{ Form::label('procesador') }}
@@ -99,7 +99,7 @@ if (isset($_GET["tipo"])) {
                                 </div>
                                 @else
                                 @endif
-                                @if ($tipo == 'pda')
+                                @if ($tipo == 'Pda')
                                 <div class="form-group">
                                     {{ Form::label('mac') }}
                                     {{ Form::text('mac', '', ['class' => 'form-control' . ($errors->has('mac') ? ' is-invalid' : ''), 'placeholder' => 'Mac']) }}
@@ -142,7 +142,7 @@ if (isset($_GET["tipo"])) {
         </div>
     </div>
 </div>
-@elseif($tipo == 'sensor'||$tipo == 'boton de panico')
+@elseif($tipo == 'Sensor'||$tipo == 'Boton de panico')
 <div>
     <div class="col-md-12">
         @includeif('partials.errors')
@@ -202,7 +202,7 @@ if (isset($_GET["tipo"])) {
         </div>
     </div>
 </div>
-@elseif($tipo == 'disco duro')
+@elseif($tipo == 'Disco duro')
 <div>
     <div class="col-md-12">
         @includeif('partials.errors')
@@ -262,7 +262,7 @@ if (isset($_GET["tipo"])) {
         </div>
     </div>
 </div>
-@elseif($tipo == 'otro')
+@elseif($tipo == 'Otro')
 <div>
     <div class="col-md-12">
         @includeif('partials.errors')
