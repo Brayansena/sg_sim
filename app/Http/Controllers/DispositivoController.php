@@ -124,7 +124,12 @@ class DispositivoController extends Controller
     public function store(Request $request)
     {
         request()->validate(Dispositivo::$rules);
-
+        $request->validate([
+            'numeroActa' => 'required|unique:dispositivo_asignados,numeroActa',
+        ],
+        [
+            'numeroActa.unique' => 'Numero de acta en uso',
+        ]);
         $dispositivo = Dispositivo::create($request->all());
         $idu = Auth::id();
         $dispositivo->id_userCreador=$idu;

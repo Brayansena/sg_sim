@@ -191,7 +191,7 @@ class DispositivoAsignadoController extends Controller
         $dispositivo->numeroActa=$request->input('numeroActa');
         $dispositivo->id_userCreador=$idu;
         $dispositivo->save();
-        return redirect()->route('dispositivos.entrada')
+        return redirect()->route('dispositivos.intercambioindex')
         ->with('success', 'Dispositivo Asignado Satisfactoriamente');
     }
 
@@ -221,7 +221,7 @@ class DispositivoAsignadoController extends Controller
         $dispositivo->numeroActa=$request->input('numeroActa');
         $dispositivo->id_userCreador=$idu;
         $dispositivo->save();
-        return redirect()->route('dispositivos.salida')
+        return redirect()->route('dispositivos.intercambioindex')
         ->with('success', 'Dispositivo Asignado Satisfactoriamente');
     }
     public function edituser($id)
@@ -240,25 +240,26 @@ class DispositivoAsignadoController extends Controller
     }
     public function updateuser(Request $request, $id)
     {
+
+        $idu = Auth::id();
         request()->validate(DispositivoAsignado::$rules2);
 
-
         $dispositivo=Dispositivo::findOrFail($id);
+        $dispositivoAsignado = new DispositivoAsignado;
+        $dispositivoAsignado->id_puntoVenta=$dispositivo->id_puntoVenta;
+        $dispositivoAsignado->id_userCreador=$idu;
+        $dispositivoAsignado->id_userAsignado=$request->input('id_userAsignado');
+        $dispositivoAsignado->id_dispositivo=$id;
+        $dispositivoAsignado->registro=$request->input('estado');
+        $dispositivoAsignado->numeroActa=$dispositivo->numeroActa;
+        $dispositivoAsignado->save();
+
+        $dispositivo->id_userCreador=$idu;
         $dispositivo->id_puntoVenta=1;
         $dispositivo->id_userAsignado=$request->input('id_userAsignado');
         $dispositivo->estado=$request->input('estado');
         $dispositivo->save();
 
-        $dispositivoAsignado = new DispositivoAsignado;;
-        $idu = Auth::id();
-        $dispositivoAsignado->id_puntoVenta=$idu;
-        $dispositivoAsignado->id_userCreador=$idu;
-        $dispositivoAsignado->id_userAsignado=$request->input('id_userAsignado');
-        $dispositivoAsignado->id_dispositivo=$id;
-        $dispositivoAsignado->id_puntoVenta=1;
-        $dispositivoAsignado->registro=$request->input('estado');
-        $dispositivoAsignado->numeroActa=$dispositivo->numeroActa;
-        $dispositivoAsignado->save();
 
         return redirect()->route('dispositivos.estado')
             ->with('success', 'Dispositivo actualizado satisfactoriamente');

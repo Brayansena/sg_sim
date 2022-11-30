@@ -99,7 +99,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/dispositivos">Dispositivo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/dispositivo/estado">Estado</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dispositivo/estado">Asignacion y Estado</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                         <li class="nav-item"><a class="nav-link" href="/punto-ventas">Puntos de Venta</a></li>
                     </ul>
@@ -220,7 +220,7 @@
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item"><a class="nav-link" href="/simcards-asignadas">Asignar Simcard</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/intercambio">Intercambio Simcard</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/dispositivo/intercambioindex">Activo</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/dispositivo/intercambioindex">Intercambio Activos</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('simcards.consulta') }}">Consultar Simcards</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('dispositivos.consulta') }}">Consultar Activos</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('punto-ventas.consulta') }}">Consultar Punto Venta</a></li>

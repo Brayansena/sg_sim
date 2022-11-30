@@ -34,7 +34,6 @@ class Dispositivo extends Model
         'estado' => 'required',
 		'tipoDispositivo' => 'required',
         'id_userAsignado' => 'required',
-        'numeroActa' => 'required',
     ];
     protected $perPage = 20;
 
