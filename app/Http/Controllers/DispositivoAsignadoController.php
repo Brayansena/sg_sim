@@ -324,7 +324,7 @@ class DispositivoAsignadoController extends Controller
         $dispositivosAsignados->id_dispositivo=$request->input('id_newActivo');
         $dispositivosAsignados->numeroActa=$request->input('numeroActa');
         $dispositivosAsignados->id_userAsignado=$dispositivo->id_userAsignado;
-        $dispositivosAsignados->registro='Asignado';
+        $dispositivosAsignados->registro='Asignado Intercambio';
         $dispositivosAsignados->save();
 
         $dispositivosAsignados = new DispositivoAsignado;
@@ -333,11 +333,11 @@ class DispositivoAsignadoController extends Controller
         $dispositivosAsignados->id_dispositivo=$id;
         $dispositivosAsignados->numeroActa=$dispositivo->numeroActa;
         $dispositivosAsignados->id_userAsignado=$dispositivo->id_userAsignado;
-        $dispositivosAsignados->registro='Disponible';
+        $dispositivosAsignados->registro='Disponible Intercambio';
         $dispositivosAsignados->save();
 
         Dispositivo::where('id',$intercambio->id_oldDispositivo)->update(['estado'=>'Disponible','id_userAsignado'=>$idu,'id_puntoVenta'=>1]);
-        Dispositivo::where('id',$intercambio->id_newDispositivo)->update(['estado'=>'Asignado','id_userAsignado'=>$idu,'id_puntoVenta'=>$dispositivo->id_puntoVenta]);
+        Dispositivo::where('id',$intercambio->id_newDispositivo)->update(['id_userCreador'=>$idu,'estado'=>'Asignado','id_userAsignado'=>3,'id_puntoVenta'=>$dispositivo->id_puntoVenta]);
 
         return redirect()->route('dispositivos.intercambioindex')
             ->with('success', 'Dispositivo actualizada satisfactoriamente');
