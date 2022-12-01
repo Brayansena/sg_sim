@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_puntoVenta')->default(1);
             $table->foreign('id_puntoVenta')->references('id')->on('punto_ventas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('estado');
-            $table->unsignedBigInteger('id_userAsignado');
+            $table->unsignedBigInteger('id_userAsignado')->default(3);
             $table->foreign('id_userAsignado')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->string('numeroActa');
             $table->string('procesador')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('imei')->nullable();
             $table->text('observacion')->nullable();
             $table->string('cantidad')->nullable();
-            $table->unsignedBigInteger('id_userCreador')->default();
+            $table->unsignedBigInteger('id_userCreador')->default(2);
             $table->foreign('id_userCreador')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();

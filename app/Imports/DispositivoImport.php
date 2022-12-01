@@ -17,17 +17,20 @@ class DispositivoImport implements ToModel, WithHeadingRow, WithUpserts
     public function model(array $row)
     {
         return new Dispositivo([
-            'modelo'=>$row['modelo'],
-            'id'=>$row['activo'],
             'tipoDispositivo'=>$row['tipo_dispositivo'],
+            'id'=>$row['activo'],
             'serial'=>$row['serial'],
+            'modelo'=>$row['modelo'],
             'id_puntoVenta'=>$row['cod_pdv'],
-            'nombrePDv'=>$row['nombre_pdv'],
-            'numeroActa'=>$row['numero_acta'],
             'estado'=>$row['estado'],
+            'numeroActa'=>$row['numero_acta'],
+            'procesador'=>$row['procesador'],
+            'ram'=>$row['ram'],
+            'discoDuro'=>$row['disco_duro'],
             'mac'=>$row['mac'],
             'imei'=>$row['imei'],
             'observacion'=>$row['observacion'],
+            'cantidad'=>$row['cantidad'],
         ]);
     }
     public function uniqueBy()
