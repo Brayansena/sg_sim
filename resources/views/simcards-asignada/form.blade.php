@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('Cod_puntoVenta') }}
-            {{ Form::text('id_puntoVenta', $simcardsAsignada->id_puntoVenta, ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod Puntoventa']) }}
+            {{ Form::text('id_puntoVenta', $simcardsAsignada->id_puntoVenta, ['class' => 'form-control' . ($errors->has('id_puntoVenta') ? ' is-invalid' : ''), 'placeholder' => 'Cod Punto Venta']) }}
             {!! $errors->first('id_puntoVenta', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

@@ -28,7 +28,7 @@ class SimcardsAsignada extends Model
 
     static $rules = [
 		'id_simcard' => 'required',
-		'id_puntoVenta' => 'required',
+		'id_puntoVenta' => 'required|exists:punto_ventas,id',
     ];
 
     protected $perPage = 1000000000000000;

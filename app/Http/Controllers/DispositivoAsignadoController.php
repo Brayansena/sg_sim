@@ -175,7 +175,7 @@ class DispositivoAsignadoController extends Controller
             'id.exists' => 'Activo no existe',
             'numeroActa.unique' => 'Numero de acta en uso'
         ]);
-        $dispositivoAsignado = new DispositivoAsignado;;
+        $dispositivoAsignado = new DispositivoAsignado;
         $idu = Auth::id();
         $dispositivoAsignado->id_userCreador=$idu;
         $dispositivoAsignado->id_userAsignado=$idu;
